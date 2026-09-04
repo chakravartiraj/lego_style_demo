@@ -409,8 +409,16 @@ test-and-summary:
 # Usage: make test-report
 .PHONY: test-report
 test-report:
-	@echo "Running tests and saving output to unit_test_report.txt..."
-	@flutter test > unit_test_report.txt
+	@echo "Running tests across all packages and saving output to unit_test_report.txt..."
+	@rm -f unit_test_report.txt
+	@touch unit_test_report.txt
+	@for dir in $$(find . -name "test" -type d -not -path "*/\.*"); do \
+		pkg_dir=$$(dirname $$dir); \
+		if [ -f "$$pkg_dir/pubspec.yaml" ]; then \
+			echo "Testing $$pkg_dir..." | tee -a unit_test_report.txt; \
+			(cd $$pkg_dir && flutter test) >> unit_test_report.txt 2>&1 || exit 1; \
+		fi \
+	done
 	@echo "Test report generated at unit_test_report.txt"
 
 # Run static analysis (enforcing strict pedantic rules)

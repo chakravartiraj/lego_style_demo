@@ -24,13 +24,13 @@ fi
 
 # 2. (Optional) Run Tests 
 # Note: In a large monorepo, unit tests might take too long for pre-commit,
-# and currently the `test` directories aren't fully set up across packages.
-echo "🧪 Skipping sociable unit tests for now (make test-report)..."
-# if ! make test-report; then
-#     echo "❌ Pre-commit failed: Tests did not pass."
-#     echo "Please fix the failing tests and try committing again."
-#     exit 1
-# fi
+# but we can enforce it here per Rule 20.
+echo "🧪 Running sociable unit tests (make test-report)..."
+if ! make test-report; then
+    echo "❌ Pre-commit failed: Tests did not pass."
+    echo "Please fix the failing tests and try committing again."
+    exit 1
+fi
 
 echo "✅ All checks passed! Proceeding with commit."
 exit 0
