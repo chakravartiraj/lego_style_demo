@@ -55,10 +55,48 @@ flutter build apk
 ## How to Code
 
 *   **IDE Setup**: You should open the **root directory** (`lego_style_demo`) in your IDE (like VS Code or Android Studio). This allows you to navigate and edit code across all packages (`app`, `core`, and `feature`) seamlessly.
-*   **Creating New Features**: When adding a new feature, consider creating a new isolated package inside the `feature/` folder, and then integrating it through the `app/lego_app` or `app/lego_navigation` layers.
-*   **Code Generation**: This project utilizes `freezed` for models and state. If you make changes to files with the `.freezed.dart` extension (or edit models that rely on it), you will need to run the build runner. Make sure to run it inside the specific package where you made the change:
-    ```bash
-    # Example: If you edited a model in the harry_potter feature
-    cd feature/harry_potter
-    flutter pub run build_runner build --delete-conflicting-outputs
-    ```
+## Workflow: Integrating a New Feature
+
+When you need to build a new feature, follow this standard workflow to keep the Lego architecture clean and modular:
+
+1.  **Create a New Feature Package:**
+    *   Navigate to the `feature/` directory and create a new Flutter package:
+        ```bash
+        cd feature
+        flutter create --template=package your_new_feature
+        ```
+2.  **Configure `pubspec.yaml`:**
+    *   Open your new feature's `pubspec.yaml` and set the Dart SDK constraint to ensure Dart 3 compatibility: `sdk: ">=3.0.0 <4.0.0"`.
+    *   Add any required dependencies (like `flutter_bloc`, `freezed`, `injectable`). If your feature needs UI components, add the `design_system` package as a path dependency:
+        ```yaml
+        dependencies:
+          design_system:
+            path: ../../core/design_system
+        ```
+3.  **Develop in Isolation:**
+    *   Build your UI, State (Bloc/Cubit), and Models entirely within this new package.
+    *   Export the necessary screens and public APIs in your package's main `lib/your_new_feature.dart` file.
+4.  **Integrate with the Main App:**
+    *   Once the feature is ready, link it to the main application.
+    *   Open `app/lego_app/pubspec.yaml` (and `app/lego_navigation/pubspec.yaml` if you need to add routes) and add your feature as a dependency:
+        ```yaml
+        dependencies:
+          your_new_feature:
+            path: ../../feature/your_new_feature
+        ```
+5.  **Fetch and Generate:**
+    *   Return to the root directory and run the Makefile tasks to resolve everything:
+        ```bash
+        make pub-get
+        make generate
+        ```
+
+## Code Generation
+
+This project utilizes `freezed` and `injectable` for models, state, and dependency injection. 
+
+Whenever you make changes to files that require generation (e.g., adding a new `.freezed.dart` or `@injectable`), simply run the generate task from the root of the project:
+```bash
+make generate
+```
+This will automatically find all packages that need code generation and run `dart run build_runner build --delete-conflicting-outputs` for you.
