@@ -1,0 +1,6 @@
+Testing ./feature/lego_list...
+00:00 +0: loading /Users/rajachakraborty/Documents/lego_style_demo/feature/lego_list/test/lego_list_test.dart
+00:00 +0: Lego List Lego world list is shown
+00:00 +1: Lego List Lego world grid is shown
+00:00 +2: Lego List I can see world's details
+00:00 +3: All tests passed!
