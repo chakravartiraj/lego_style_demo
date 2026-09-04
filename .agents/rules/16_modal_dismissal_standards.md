@@ -1,0 +1,12 @@
+# 16. Modal & Dialog Dismissal Standards
+-   **Strict Non-Dismissible Barriers**: **ALL** critical operational popups, dialogs, and bottom sheets **MUST** be non-dismissible by default gestures (tapping the background barrier or swiping down).
+-   **ShowDialog Implementation**:
+    -   **Mandatory Property**: **ALWAYS** set `barrierDismissible: false` inside the `showDialog` call.
+-   **ShowModalBottomSheet Implementation**:
+    -   **Mandatory Properties**: **ALWAYS** set `isDismissible: false` and `enableDrag: false`.
+-   **Explicit Dismissal Buttons**:
+    -   **Zero Exceptions**: Every modal or dialog **MUST** provide its own explicit dismissal button (e.g., "Cancel", "Back", or a Close icon `Icons.close`) as the ONLY way to exit the modal.
+    -   **Logic**: No data entry or confirmation flow should be interruptible by accidental background interactions.
+-   **Audit & Compliance**:
+    -   **New Components**: When creating any component called via `.show()`, verify that the static show method sets these guards.
+    -   **Standard Implementation**: Prefer using shared modal classes (e.g., `CustomConfirmationModal.show`, `GenericBottomSheet.show`) as they already enforce these standards.
