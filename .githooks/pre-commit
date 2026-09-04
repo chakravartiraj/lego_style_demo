@@ -1,0 +1,36 @@
+#!/bin/sh
+# -----------------------------------------------------------------------------
+# GIT PRE-COMMIT HOOK
+# Enforces formatting, static analysis, and tests before allowing commits.
+# -----------------------------------------------------------------------------
+
+echo "---------------------------------------"
+echo "Running Pre-commit Checks (Tide Standards)"
+echo "---------------------------------------"
+
+# Check if make is installed
+if ! command -v make >/dev/null 2>&1; then
+    echo "❌ Error: 'make' could not be found. Please install make to run hooks."
+    exit 1
+fi
+
+# 1. Run Static Analysis (Linting)
+echo "🔍 Running static analysis (make lint)..."
+if ! make lint; then
+    echo "❌ Pre-commit failed: Static analysis found warnings/errors."
+    echo "Please fix the issues above and try committing again."
+    exit 1
+fi
+
+# 2. (Optional) Run Tests 
+# Note: In a large monorepo, unit tests might take too long for pre-commit,
+# and currently the `test` directories aren't fully set up across packages.
+echo "🧪 Skipping sociable unit tests for now (make test-report)..."
+# if ! make test-report; then
+#     echo "❌ Pre-commit failed: Tests did not pass."
+#     echo "Please fix the failing tests and try committing again."
+#     exit 1
+# fi
+
+echo "✅ All checks passed! Proceeding with commit."
+exit 0

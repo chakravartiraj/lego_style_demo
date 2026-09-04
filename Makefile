@@ -412,3 +412,11 @@ test-report:
 	@echo "Running tests and saving output to unit_test_report.txt..."
 	@flutter test > unit_test_report.txt
 	@echo "Test report generated at unit_test_report.txt"
+
+# Run static analysis (enforcing strict pedantic rules)
+# Usage: make lint
+.PHONY: lint
+lint:
+	@echo "Running flutter analyze..."
+	@cd app/lego_app && flutter analyze
+	@echo "Linting passed successfully!"
