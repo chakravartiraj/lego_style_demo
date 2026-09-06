@@ -12,6 +12,7 @@ dependencies:
     path: ../../core/design_system
   flutter:
     sdk: flutter
+  google_fonts: ^8.2.1
   lego_configuration:
     path: ../lego_configuration
   lego_navigation:

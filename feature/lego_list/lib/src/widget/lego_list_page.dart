@@ -31,15 +31,36 @@ class _List extends StatelessWidget {
     return FocusTraversalGroup(
       policy: ReadingOrderTraversalPolicy(),
       child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         itemBuilder: (context, index) {
-          return Semantics(
-            button: true,
-            label: 'Select ${legoSets[index].name}',
-            child: ListTile(
-              title: Text(legoSets[index].name),
-              onTap: () => context
-                  .read<LegoListCubit>()
-                  .onLegoSetSelected(legoSets[index]),
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Semantics(
+              button: true,
+              label: 'Select ${legoSets[index].name}',
+              child: ListTile(
+                leading: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF6C63FF), Color(0xFF03DAC6)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.category, color: Colors.white),
+                ),
+                title: Text(
+                  legoSets[index].name,
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                ),
+                trailing: const Icon(Icons.chevron_right, color: Colors.white54),
+                onTap: () => context
+                    .read<LegoListCubit>()
+                    .onLegoSetSelected(legoSets[index]),
+              ),
             ),
           );
         },
@@ -58,10 +79,11 @@ class _Grid extends StatelessWidget {
     return FocusTraversalGroup(
       policy: ReadingOrderTraversalPolicy(),
       child: GridView.builder(
+          padding: const EdgeInsets.all(16),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
           ),
           itemCount: legoSets.length,
           itemBuilder: (context, index) {
@@ -69,12 +91,35 @@ class _Grid extends StatelessWidget {
               button: true,
               label: 'Select ${legoSets[index].name}',
               child: InkWell(
+                borderRadius: BorderRadius.circular(20),
                 onTap: () => context
                     .read<LegoListCubit>()
                     .onLegoSetSelected(legoSets[index]),
                 child: Card(
-                  color: Theme.of(context).colorScheme.secondary,
-                  child: Center(child: Text(legoSets[index].name)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF2A2A2A), Color(0xFF1E1E1E)],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          legoSets[index].name,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             );
