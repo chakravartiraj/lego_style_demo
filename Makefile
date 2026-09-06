@@ -15,7 +15,8 @@ help:
 	@echo "  make clean       - Clean the build directory"
 	@echo "  make clean-all   - Deep clean (stop Gradle daemons, remove caches)"
 	@echo "  make sync        - Sync Gradle dependencies"
-
+	@echo "  make create-emulator - Create an Android emulator if it doesn't exist"
+	@echo "  make run-android - Install and launch the app on connected device/emulator"
 build:
 	@echo "🔨 Building debug APK..."
 	./gradlew assembleDebug
@@ -41,3 +42,25 @@ clean-all:
 sync:
 	@echo "🔄 Syncing Gradle dependencies..."
 	./gradlew dependencies
+
+create-emulator:
+	@echo "📱 Checking/Creating Android Emulator..."
+	@ARCH=$$(uname -m); \
+	if [ "$$ARCH" = "arm64" ] || [ "$$ARCH" = "aarch64" ]; then \
+		SYS_IMG="system-images;android-34;google_apis;arm64-v8a"; \
+	else \
+		SYS_IMG="system-images;android-34;google_apis;x86_64"; \
+	fi; \
+	echo "Installing $$SYS_IMG..."; \
+	yes | $(ANDROID_HOME)/cmdline-tools/latest/bin/sdkmanager "$$SYS_IMG" > /dev/null; \
+	if ! $(ANDROID_HOME)/cmdline-tools/latest/bin/avdmanager list avd | grep -q "LegoEmulator"; then \
+		echo "no" | $(ANDROID_HOME)/cmdline-tools/latest/bin/avdmanager create avd -n LegoEmulator -k "$$SYS_IMG" --device "pixel" --force; \
+		echo "✅ Emulator 'LegoEmulator' created."; \
+	else \
+		echo "✅ Emulator 'LegoEmulator' already exists."; \
+	fi
+
+run-android:
+	@echo "🚀 Installing and Launching App on connected device/emulator..."
+	./gradlew installDebug
+	$(ANDROID_HOME)/platform-tools/adb shell am start -n com.example.lego/.MainActivity
