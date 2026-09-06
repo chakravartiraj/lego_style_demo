@@ -15,6 +15,25 @@ final router = GoRouter(
     ),
   ],
   errorBuilder: (context, state) => Scaffold(
-    appBar: AppBar(),
+    appBar: AppBar(
+      title: const Text('Universe Unavailable'),
+    ),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.construction, size: 64, color: Colors.white54),
+          const SizedBox(height: 16),
+          Text(
+            'The universe "${state.uri.pathSegments.last}" is still under construction.',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white70,
+            ),
+          ),
+        ],
+      ),
+    ),
   ),
 );
