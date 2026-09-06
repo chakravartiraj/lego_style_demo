@@ -12,7 +12,7 @@ description: Auto-generate a Weekly Progress Report for Raja Chakraborty based o
 
 3. **Format and Present the Report**
    - Summarize the git activity into professional bullet points (e.g., "Completed X", "Resolved Y").
-   - Present the final report in a **Markdown Code Block** for easy one-click copying.
+   - Present the final report in a **Markdown Code ViewModelk** for easy one-click copying.
    - Use the following email template format:
 
      ```text

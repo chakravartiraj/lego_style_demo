@@ -10,8 +10,8 @@ This workflow generates a structured Zoho Sprint Task for a given requirement, e
 2. **Pattern Alignment**: Determine how the task affects existing architectures:
    - **API Layer**: Endpoint paths (e.g., specialized `/priority` or `/update-driver` routes), request/response payloads.
    - **Data Layer**: Models (Freezed/JSON), session persistence, and constant keys.
-   - **Business Logic**: BLoC subjects, streams, and repository methods.
-   - **UI Layer**: Module-specific screens, standard widgets, and reactive visibility.
+   - **Business Logic**: ViewModel subjects, streams, and repository methods.
+   - **UI Layer**: Module-specific screens, standard composables, and reactive visibility.
 3. **Draft Template**: Create the task content following this exact structure:
    - **Title**: [Module] > [Screen/Component]: [Action] [Specific Issue/Feature]. Make it highly specific and to the point so a developer immediately visualizes the exact part of the codebase affected (e.g., `Driver Module > Delivery Condfirmation Modal: Make image upload optional for MCC trips`).
    - **Description**: Context and technical rationale.

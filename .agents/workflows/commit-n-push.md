@@ -14,7 +14,7 @@ description: Stage specific or all changes and generate a PARSV commit message f
    - **Root-cause**: A "Root-cause:" section explaining the technical reason for the change.
    - **Solution**: A "Solution:" section detailing how the code addresses the problem.
    - **Verification**: A bulleted "Verification:" list of how the change was validated (e.g., tests, specific scenarios).
-   - **Version Bump Changelog**: If `pubspec.yaml` is part of the staged changes (indicating a release or version bump), you MUST include an "Included in this release:" section detailing a clear summary of the major/minor/patch improvements bundled in this release for QA and IT review.
+   - **Version Bump Changelog**: If `build.gradle.kts` is part of the staged changes (indicating a release or version bump), you MUST include an "Included in this release:" section detailing a clear summary of the major/minor/patch improvements bundled in this release for QA and IT review.
    - **No Agent Rule References**: Ensure that internal agent rules (e.g., "Rule 15", "Agent Rule 04") are NEVER explicitly mentioned by name or number in the commit message. Describe the principle (e.g., "DRY principle", "context safety") instead of citing the rule ID.
    - **Formatting**: Ensure a blank line between each section for readability.
 5. **Output**: Provide the generated commit message to the user.

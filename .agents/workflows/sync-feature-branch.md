@@ -31,7 +31,7 @@ Synchronize a feature branch with the latest changes from a source branch (e.g.,
 6.  **Verify Integrity**:
     - Run static analysis to ensure no regressions were introduced.
     ```bash
-    flutter analyze
+    android analyze
     ```
 7.  **Push Updates**:
     - Once all commits are applied and verified, push the synchronized branch to the remote.

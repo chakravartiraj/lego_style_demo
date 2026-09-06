@@ -9,7 +9,7 @@ Generates a concise release note that fits the strict 500-character limit of the
 
 ## Steps
 1. **Identify Version Bump Commits**: 
-   - Analyze the `git log` to find the two most recent commits that represent a version bump (e.g., commits containing "version bump", "bump version", "release version" in their message or modifying `pubspec.yaml` versions).
+   - Analyze the `git log` to find the two most recent commits that represent a version bump (e.g., commits containing "version bump", "bump version", "release version" in their message or modifying `build.gradle.kts` versions).
    - Let's call them `COMMIT_LATEST_BUMP` and `COMMIT_PREVIOUS_BUMP`.
 
 2. **Retrieve Changes**:

@@ -14,7 +14,7 @@ description: Auto-generate a Daily Progress Report for Raja Chakraborty based on
 
 3. **Format and Present the Report**
    - Summarize the git activity into concise bullet points.
-   - Present the final report in a **Markdown Code Block** for copying.
+   - Present the final report in a **Markdown Code ViewModelk** for copying.
    - Use the following email/message template format:
 
      ```text

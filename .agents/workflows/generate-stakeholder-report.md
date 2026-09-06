@@ -16,12 +16,12 @@ description: Auto-generate a simplified, non-technical Daily Progress Report for
    - **Translate** technical terms into business value or user-facing features.
    - **Group** related technical commits into single high-level updates.
    - *Examples*:
-     - *Git*: "Refactor BLoC error streams and enhance repository error handling" -> *Report*: "Improved app stability and error message display."
+     - *Git*: "Refactor ViewModel error streams and enhance repository error handling" -> *Report*: "Improved app stability and error message display."
      - *Git*: "Integate Tanker Details API for dynamic booking options" -> *Report*: "Enabled dynamic Tanker Types and Capacity options in the booking screen."
      - *Git*: "Config: Update API Base URL" -> *Report*: "Updated app configuration for backend migration."
 
 4. **Format and Present the Report**
-   - Present the final report in a **Markdown Code Block** for copying.
+   - Present the final report in a **Markdown Code ViewModelk** for copying.
    - Use the following email/message template format:
 
      ```text

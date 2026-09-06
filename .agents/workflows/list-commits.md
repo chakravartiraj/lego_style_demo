@@ -17,7 +17,7 @@ description: List out all the tasks committed on a specified date or time.
    - Underneath the title, provide an italicized, concise human-readable summary of what the commit actually accomplished, using context from the commit body or recent conversation.
    - Example format:
      1. **`bfdab59d` - Fix tanker registration pre-filling and API integration**
-        *(Added missing fields to the `OwnerTankerDetail` model and updated the BLoC mapping logic)*
+        *(Added missing fields to the `OwnerTankerDetail` model and updated the ViewModel mapping logic)*
 
 4. **Completion**
    - Output the finalized list to the user directly (without asking further questions unless the date is ambiguous).
