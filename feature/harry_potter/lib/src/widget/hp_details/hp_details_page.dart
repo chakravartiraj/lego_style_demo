@@ -11,11 +11,24 @@ class HpDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(character.name)),
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(character.biography),
-        )),
+        appBar: AppBar(
+          title: Semantics(
+            header: true,
+            child: Text(character.name),
+          ),
+        ),
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: SingleChildScrollView(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Semantics(
+                label: 'Biography of ${character.name}',
+                child: Text(character.biography),
+              ),
+            )),
+          ),
+        ),
       );
 }

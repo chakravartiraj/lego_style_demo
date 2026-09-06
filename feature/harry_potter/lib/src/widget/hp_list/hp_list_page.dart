@@ -15,22 +15,32 @@ class HpListPage extends StatelessWidget {
       appBar: AppBar(
         leading: BackButton(
             onPressed: () => context.flow<HarryPotterState>().complete()),
-        title: Text(HpLocalizations.of(context).chooseCharacter),
+        title: Semantics(
+          header: true,
+          child: Text(HpLocalizations.of(context).chooseCharacter),
+        ),
       ),
       body: BlocProvider<HPCubit>(
           create: (_) => GetIt.I.get<HPCubit>(),
           child: BlocBuilder<HPCubit, HPState>(builder: (context, state) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(state.characters[index].name),
-                  onTap: () => context.flow<HarryPotterState>().update(
-                        (s) => s.copyWith(
-                            selectedCharacter: state.characters[index]),
-                      ),
-                );
-              },
-              itemCount: state.characters.length,
+            return FocusTraversalGroup(
+              policy: ReadingOrderTraversalPolicy(),
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Semantics(
+                    button: true,
+                    label: 'Select ${state.characters[index].name}',
+                    child: ListTile(
+                      title: Text(state.characters[index].name),
+                      onTap: () => context.flow<HarryPotterState>().update(
+                            (s) => s.copyWith(
+                                selectedCharacter: state.characters[index]),
+                          ),
+                    ),
+                  );
+                },
+                itemCount: state.characters.length,
+              ),
             );
           })));
 }
