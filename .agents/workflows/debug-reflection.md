@@ -1,0 +1,4 @@
+---
+description: Analyze potential sources of a problem and validate with logs
+---
+Reflect on 5-7 different possible sources of the problem. Distill those down to 1-2 most likely sources. Then add logs to validate your assumptions before we move on to implementing the actual code fix.

@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "1",
+      "name": "Millennium Falcon",
+      "theme": "Star Wars",
+      "pieces": 7541,
+      "price": 799.99
+    },
+    {
+      "id": "2",
+      "name": "Hogwarts Castle",
+      "theme": "Harry Potter",
+      "pieces": 6020,
+      "price": 399.99
+    }
+  ]
+}

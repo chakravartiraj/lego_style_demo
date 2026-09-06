@@ -1,0 +1,11 @@
+name: lego_style_demo_workspace
+description: A root dummy package for the IDE analyzer to resolve global lints.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
