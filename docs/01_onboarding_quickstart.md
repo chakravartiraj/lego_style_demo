@@ -1,44 +1,45 @@
 # 🚀 Day 1: Onboarding Quickstart
 
-Welcome to the **Lego Style Monorepo**! This repository is built upon the feature-first "Lego Architecture" principles popularized by Anna and Oleksandr Leushchenko at Flutter Vikings.
+Welcome to the **Lego Style Monorepo (Android Compose Edition)**! This repository is built upon feature-first "Lego Architecture" principles, ported entirely to Native Kotlin Jetpack Compose and Gradle.
 
 If you are a new developer joining the team, this guide will help you get the app running on your machine in minutes.
 
 ## 1. Prerequisites
 Ensure you have the following installed:
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) (Check `environment.sdk` in `pubspec.yaml` for the exact version)
+- [Android Studio](https://developer.android.com/studio) (which includes the Android SDK and bundled JDK)
+- Kotlin 1.9.22 / AGP 8.3.0 (Configured automatically via Gradle)
 - Make (Standard on macOS/Linux)
 
 ## 2. Cloning the Repository
 ```bash
 git clone https://github.com/chakravartiraj/lego_style_demo.git
 cd lego_style_demo
+git checkout android_compose
 ```
 
 ## 3. The `make` Workflow
 This repository heavily relies on `Makefile` for executing complex monorepo tasks.
-You **do not** need to run `flutter pub get` manually in every directory!
+You **do not** need to manually click through Android Studio to run typical CI checks.
 
-Just run the following command from the root to fetch all dependencies across the entire monorepo:
+Just run the following command from the root to sync all Gradle dependencies across the entire monorepo:
 ```bash
-make pub-get
+make sync
 ```
 
 ## 4. Running the App
-The primary entry point for the application is located in the `app/lego_app` package.
-To run the app on your connected device or simulator:
+The primary entry point for the application is located in the `:app` module.
+To run the app on your connected device or emulator from the terminal:
 ```bash
-cd app/lego_app
-flutter run
+make build
+# Or launch the ':app' configuration directly within Android Studio
 ```
-*(Alternatively, you can use `make run-ios` or `make run-android` from the root if configured).*
 
 ## 5. Running the Pre-commit Checks Locally
 Before submitting a Pull Request, verify that your code adheres to our strict architectural and linting standards.
 Run the CI checks manually:
 ```bash
 make lint
-make test-report
+make test
 ```
 
 ## 6. Tide-Specific Engineering Standards (E2E Flow)
@@ -54,11 +55,11 @@ Every single commit in this repository **must** strictly adhere to the PARSV str
 *   **V**erification: How was it tested?
 
 ### B. Dialog & Modal Management
-To prevent overlapping popups, you must adhere to the single-instance visibility gate. Always use a `static bool _isShowing` flag in your dialog managers, resetting it to `false` automatically when dismissed.
+To prevent overlapping popups in Compose, you must adhere to a single-instance visibility gate. Always use a centralized StateFlow or a `MutableState<Boolean>` flag in your ViewModel/DialogManager, resetting it to `false` automatically when dismissed.
 
 ### C. Accessibility (WCAG 2.2)
-Tide features target global audiences. All interactive widgets must have explicit `Semantics`, support 48x48 logical pixel touch targets (mobile), and have explicit `FocusNode` handling for desktop keyboard traversal.
+Tide features target global audiences. All interactive Compose elements must have explicit `Modifier.semantics`, support 48dp logical pixel touch targets, and handle explicit `FocusRequester` navigation for desktop/keyboard traversal.
 
 ---
 **What's Next?** 
-Read [02_lego_architecture_core_principles.md](02_lego_architecture_core_principles.md) to understand how the codebase is structured.
+Read [02_lego_architecture_core_principles.md](02_lego_architecture_core_principles.md) to understand how the Gradle modules are structured.
