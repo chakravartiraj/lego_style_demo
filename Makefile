@@ -1,5 +1,9 @@
 # Makefile for Android Jetpack Compose Monorepo
 
+# Ensure Gradle can find Java and the Android SDK natively (mimicking Flutter's auto-resolution)
+export JAVA_HOME ?= /opt/homebrew/opt/openjdk@17
+export ANDROID_HOME ?= $(HOME)/Library/Android/sdk
+
 .PHONY: help build lint test clean clean-all sync
 
 # Default target
