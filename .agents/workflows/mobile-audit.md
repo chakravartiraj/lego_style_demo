@@ -5,8 +5,8 @@ description: Perform an audit of the codebase, native modules, local databases, 
 Perform a comprehensive **Mobile Audit** on a selected feature, mobile module, custom native channel, local storage layout, or Edge AI model implementation to ensure it aligns with elite mobile system design guidelines:
 
 ### 1. Architectural & Native Alignment
-- Review native modules (Kotlin/Swift) and platform channels. Ensure async tasks run off the UI thread and results return safely on the main thread/actor.
-- Check if UI code leverages Jetpack Compose or SwiftUI instead of legacy XML/Storyboards.
+- Review native modules (Swift/Swift) and platform channels. Ensure async tasks run off the UI thread and results return safely on the main thread/actor.
+- Check if UI code leverages SwiftUI or SwiftUI instead of legacy XML/Storyboards.
 
 ### 2. Scale & System Design Analysis
 - **Memory & Allocation:** Audit lifecycle handlers and async streams for cancellation/disposal leaks.

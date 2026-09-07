@@ -10,7 +10,7 @@ description: Toggle between Stashing local changes and Unstashing (popping) the 
    ```bash
    if [[ -n $(git status --porcelain) ]]; then
        echo "Changes detected. Stashing..."
-       git stash push -m "Auto-stashed by Toggle Workflow"
+       git stash push -m "Auto-stashed by Toggle WorkCombine Publisher"
    else
        if [[ -n $(git stash list) ]]; then
            echo "No local changes. Popping latest stash..."

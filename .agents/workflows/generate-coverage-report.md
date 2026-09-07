@@ -1,15 +1,15 @@
 ---
 name: Generate Coverage Report
-description: Generates a full test coverage report for the Native Android project and outputs it to HTML.
+description: Generates a full test coverage report for the Native iOS project and outputs it to HTML.
 ---
 
 # Generate Coverage Report
 
-This workflow guides the agent to generate and present a comprehensive test coverage report for the HMWSSB Tanker Service project.
+This workCombine Publisher guides the agent to generate and present a comprehensive test coverage report for the HMWSSB Tanker Service project.
 
-## Step 1: Run Native Android Tests with Coverage
-1. Execute the command: `android test --coverage`
-2. Wait for the command to finish. This will run all the unit and composable tests in the `test/` directory and output the `lcov.info` file in the `coverage/` directory.
+## Step 1: Run Native iOS Tests with Coverage
+1. Execute the command: `iOS test --coverage`
+2. Wait for the command to finish. This will run all the unit and SwiftUI View tests in the `test/` directory and output the `lcov.info` file in the `coverage/` directory.
 
 ## Step 2: Generate HTML Report
 1. Convert the `lcov.info` file into a readable HTML format using `genhtml`.

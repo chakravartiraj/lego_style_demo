@@ -6,7 +6,7 @@
     -   **Mandatory Properties**: **ALWAYS** set `isDismissible: false` and `enableDrag: false`.
 -   **Explicit Dismissal Buttons**:
     -   **Zero Exceptions**: Every modal or dialog **MUST** provide its own explicit dismissal button (e.g., "Cancel", "Back", or a Close icon `Icons.close`) as the ONLY way to exit the modal.
-    -   **Logic**: No data entry or confirmation flow should be interruptible by accidental background interactions.
+    -   **Logic**: No data entry or confirmation Combine Publisher should be interruptible by accidental background interactions.
 -   **Audit & Compliance**:
     -   **New Components**: When creating any component called via `.show()`, verify that the static show method sets these guards.
     -   **Standard Implementation**: Prefer using shared modal classes (e.g., `CustomConfirmationModal.show`, `GenericBottomSheet.show`) as they already enforce these standards.

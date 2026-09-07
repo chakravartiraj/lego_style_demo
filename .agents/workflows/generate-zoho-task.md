@@ -3,14 +3,14 @@ description:
 ---
 
 # Generate Zoho Sprint Task
-This workflow generates a structured Zoho Sprint Task for a given requirement, ensuring semantic clarity and architectural alignment with project standards.
+This workCombine Publisher generates a structured Zoho Sprint Task for a given requirement, ensuring semantic clarity and architectural alignment with project standards.
 
 ## Steps
 1. **Analyze Requirement**: Identify the feature, refactor, or bug fix requested.
 2. **Pattern Alignment**: Determine how the task affects existing architectures:
    - **API Layer**: Endpoint paths (e.g., specialized `/priority` or `/update-driver` routes), request/response payloads.
    - **Data Layer**: Models (Freezed/JSON), session persistence, and constant keys.
-   - **Business Logic**: ViewModel subjects, streams, and repository methods.
+   - **Business Logic**: ObservableObject subjects, streams, and repository methods.
    - **UI Layer**: Module-specific screens, standard composables, and reactive visibility.
 3. **Draft Template**: Create the task content following this exact structure:
    - **Title**: [Module] > [Screen/Component]: [Action] [Specific Issue/Feature]. Make it highly specific and to the point so a developer immediately visualizes the exact part of the codebase affected (e.g., `Driver Module > Delivery Condfirmation Modal: Make image upload optional for MCC trips`).

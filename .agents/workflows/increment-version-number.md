@@ -1,8 +1,8 @@
 ---
-description: Increment the patch version number in build.gradle.kts
+description: Increment the patch version number in project.yml
 ---
 
-1. Read `app/build.gradle.kts` to find the current version.
+1. Read `app/project.yml` to find the current version.
 2. Locate the `versionName = ` line (e.g., `versionName = "1.0.21"`).
 3. Increment the patch version (the third number). For example, change `"1.0.21"` to `"1.0.22"`.
 4. Keep the `versionCode` as is, or increment it if specifically requested.

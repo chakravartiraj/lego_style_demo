@@ -2,7 +2,7 @@
 description: Synchronize a feature branch with the latest changes from a source branch
 ---
 
-# Workflow: Sync Feature Branch (Cherry-Pick)
+# WorkCombine Publisher: Sync Feature Branch (Cherry-Pick)
 
 Synchronize a feature branch with the latest changes from a source branch (e.g., `main`) using a sequential cherry-pick strategy. This method is preferred when a clean history is required without merge commits.
 
@@ -31,7 +31,7 @@ Synchronize a feature branch with the latest changes from a source branch (e.g.,
 6.  **Verify Integrity**:
     - Run static analysis to ensure no regressions were introduced.
     ```bash
-    android analyze
+    iOS analyze
     ```
 7.  **Push Updates**:
     - Once all commits are applied and verified, push the synchronized branch to the remote.
@@ -40,5 +40,5 @@ Synchronize a feature branch with the latest changes from a source branch (e.g.,
     ```
 
 ## Usage Notes
-- Use this workflow when you want to bring specific features or fixes from `main` into your work-in-progress branch without merging the entire history of `main`.
+- Use this workCombine Publisher when you want to bring specific features or fixes from `main` into your work-in-progress branch without merging the entire history of `main`.
 - If the number of commits is large, consider a `merge` or `rebase` instead, unless project rules strictly enforce cherry-picking.

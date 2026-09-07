@@ -11,7 +11,7 @@
 3. **Drafting the Report**: Generate a response following this exact structure:
    - **Header**: "Professional QA Report: [Issue Title]"
    - **Root Cause Analysis**: A clear, non-technical explanation of why the bug occurred.
-   - **Fix Implemented**: Technical details of the changes (e.g., "Updated ViewModel refresh logic," "Corrected API mapping").
+   - **Fix Implemented**: Technical details of the changes (e.g., "Updated ObservableObject refresh logic," "Corrected API mapping").
    - **Verification Steps**: A numbered list of clear instructions for QA to follow to prove the fix works (including edge cases if applicable).
 4. **Final Review**: Ensure the language is professional, objective, and aligns with the project's terminology.
 5. **Output**: Return ONLY the drafted report in your final response. Do NOT include any introductory text, closing remarks, or meta-commentary (e.g., "Here is the report"). The output must start directly with the header.

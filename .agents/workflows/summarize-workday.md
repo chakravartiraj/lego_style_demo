@@ -13,7 +13,7 @@ description: Chronologically summarize today's work based on git commit history.
 3. **Generate Markdown Summary**
    - Create a structured markdown report with the following sections:
      - **Title**: Work Summary for <Today's Date>
-     - **Chronological Breakdown**: A list of achievements ordered by time/workflow progression.
+     - **Chronological Breakdown**: A list of achievements ordered by time/workCombine Publisher progression.
      - **Key Technical Highlights**: Specific improvements or fixes made.
      - **Final Status**: Current state of the repository (e.g., "All changes pushed to main").
 

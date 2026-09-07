@@ -1,13 +1,13 @@
 ---
-description: Toggle between online and offline mode in Android emulator using adb
+description: Toggle between online and offline mode in iOS simulator using adb
 ---
 
-# Toggle Network Mode in Android Emulator
+# Toggle Network Mode in iOS Simulator
 
 Toggle WiFi and Mobile Data on/off together for testing network-related functionality.
 
 ## Prerequisites
-- Android emulator must be running
+- iOS simulator must be running
 - ADB must be installed and in PATH
 
 ## Quick Toggle Commands
@@ -42,5 +42,5 @@ adb shell svc wifi enable && adb shell svc data enable
 | Data only on | `adb shell svc data enable` |
 
 ## Notes
-- Changes take effect immediately on the emulator
+- Changes take effect immediately on the simulator
 - For physical devices, root access may be required

@@ -1,28 +1,28 @@
 ---
-description: Generate a QA signoff email and related API flow unit tests for a specific build/environment.
+description: Generate a QA signoff email and related API Combine Publisher unit tests for a specific build/environment.
 ---
 
 1. **Changelog Extraction**:
    - Automatically determine the changes included in the build by analyzing the git history.
-   - Find the commits between the current app version bump and the previous app version bump in `build.gradle.kts`.
+   - Find the commits between the current app version bump and the previous app version bump in `project.yml`.
    - Use `git log` and `git diff` to extract a list of features, fixes, and modifications made during this release window.
 
-2. **Generate Relevant Unit/Composable Tests**:
+2. **Generate Relevant Unit/SwiftUI View Tests**:
    - Based on the extracted changelog, analyze what parts of the codebase were actually modified (e.g., UI screens, ViewModels, Repositories, APIs).
    - Write or update appropriate tests corresponding to those specific changes:
-     - **Composable Tests**: If UI components or screens were modified.
-     - **ViewModel Tests**: If state management logic was altered.
+     - **SwiftUI View Tests**: If UI components or screens were modified.
+     - **ObservableObject Tests**: If state management logic was altered.
      - **API Tests**: If network calls or environment configurations changed (ensure `device_info_plus` and platform channels are properly mocked).
 
 3. **Generate Unit Test Report**:
    - Run the newly created or updated test suite via `run_command`:
      ```bash
-     android test > unit_test_report.txt
+     iOS test > unit_test_report.txt
      ```
    - Verify the command completes successfully and produces a clean report (fixing any native plugin crashes if they occur).
 
 4. **Information Gathering (Manual)**: 
-   - Ask the user for any missing release details that cannot be found in git (e.g., Target Environment, APK Download Link).
+   - Ask the user for any missing release details that cannot be found in git (e.g., Target Environment, IPA Download Link).
 
 5. **Generate QA Signoff Email**:
    - Create or update the `qa_signoff_email.md` artifact in the active workspace.
@@ -41,7 +41,7 @@ description: Generate a QA signoff email and related API flow unit tests for a s
    *   **App Name:** HMWSSB Staff App
    *   **Version:** [VERSION]
    *   **Environment:** [ENVIRONMENT]
-   *   **APK Download Link:** [Download [APK_FILENAME]]([DOWNLOAD_LINK])
+   *   **IPA Download Link:** [Download [APK_FILENAME]]([DOWNLOAD_LINK])
    
    **Changes Included:**
    [Dynamically insert a clean, bulleted list of changes summarized from the Git commits]
@@ -50,7 +50,7 @@ description: Generate a QA signoff email and related API flow unit tests for a s
    
    **Dev Verification & Testing:**
    *   **Unit Tests:** Executed and passed (unit testing report attached).
-   *   **Basic Flow Validation:** Verified the build successfully calling the new configuration with basic flow actions.
+   *   **Basic Combine Publisher Validation:** Verified the build successfully calling the new configuration with basic Combine Publisher actions.
    
    Please proceed with your verifications on the `[ENVIRONMENT_LOWERCASE]` backend and provide your signoff or let me know if you encounter any issues.
    

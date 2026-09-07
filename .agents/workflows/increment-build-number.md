@@ -1,8 +1,8 @@
 ---
-description: Increment the build number in build.gradle.kts
+description: Increment the build number in project.yml
 ---
 
-1. Read `app/build.gradle.kts` to find the current version.
+1. Read `app/project.yml` to find the current version.
 2. Locate the `versionCode = ` line.
 3. Increment the integer value of `versionCode`. For example, change `versionCode = 1` to `versionCode = 2`.
 4. Save the file.

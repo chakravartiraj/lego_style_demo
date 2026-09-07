@@ -3,7 +3,7 @@ description: Generates a reply message with an appropriate tone that addresses t
 ---
 
 # Generate Reply Message
-This workflow generates a structured reply message to stakeholders, QA, or team members. It ensures the tone is collaborative and focused on solutions while retaining necessary technical context.
+This workCombine Publisher generates a structured reply message to stakeholders, QA, or team members. It ensures the tone is collaborative and focused on solutions while retaining necessary technical context.
 
 ## Steps
 1. **Determine Scope**: Analyze the user's issue, request, or complaint to understand the core concern and the technical context provided.

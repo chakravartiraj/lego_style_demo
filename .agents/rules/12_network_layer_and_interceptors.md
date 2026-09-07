@@ -6,4 +6,4 @@
   - **Token Refresh**: Automatically catching 401 Unauthorized errors, refreshing the token, and retrying the failed request transparently.
   - **Logging**: Logging request payloads and response bodies (in non-production environments only).
 - **Timeouts**: The network client MUST have strict global connection and receive timeouts configured to prevent the app from hanging indefinitely on poor connections.
-- **No UI Coupling**: The network layer MUST NEVER attempt to trigger UI actions directly (e.g., showing a dialog on a 500 error). It must yield a mapped `Failure`, and the UI/ViewModel is responsible for the presentation of that failure.
+- **No UI Coupling**: The network layer MUST NEVER attempt to trigger UI actions directly (e.g., showing a dialog on a 500 error). It must yield a mapped `Failure`, and the UI/ObservableObject is responsible for the presentation of that failure.

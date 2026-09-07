@@ -1,15 +1,15 @@
 ---
-description: Generates a concise release note that fits the strict 500-character limit of the Google Play Console release notes field, based on all git commits between the two most recent version bump commits.
+description: Generates a concise release note that fits the strict 500-character limit of the App Store Connect release notes field, based on all git commits between the two most recent version bump commits.
 ---
 
-# Generate Play Console Release Notes
+# Generate App Store Connect Release Notes
 
 ## Description
-Generates a concise release note that fits the strict 500-character limit of the Google Play Console release notes field, based on all git commits between the two most recent version bump commits.
+Generates a concise release note that fits the strict 500-character limit of the App Store Connect release notes field, based on all git commits between the two most recent version bump commits.
 
 ## Steps
 1. **Identify Version Bump Commits**: 
-   - Analyze the `git log` to find the two most recent commits that represent a version bump (e.g., commits containing "version bump", "bump version", "release version" in their message or modifying `build.gradle.kts` versions).
+   - Analyze the `git log` to find the two most recent commits that represent a version bump (e.g., commits containing "version bump", "bump version", "release version" in their message or modifying `project.yml` versions).
    - Let's call them `COMMIT_LATEST_BUMP` and `COMMIT_PREVIOUS_BUMP`.
 
 2. **Retrieve Changes**:
@@ -38,4 +38,4 @@ Generates a concise release note that fits the strict 500-character limit of the
      ```
 
 6. **Output**:
-   - Present the final release note to the user in a markdown code block so they can easily copy and paste it directly into the Google Play Console without any manual edits.
+   - Present the final release note to the user in a markdown code block so they can easily copy and paste it directly into the App Store Connect without any manual edits.

@@ -3,7 +3,7 @@ description: Generates a dev comment for a given Git commit ID, developer notes,
 ---
 
 # Generate Dev Comment for Commit
-This workflow inspects a specific change context and generates a structured developer comment that translates code changes into clear functional updates, accompanied by a QA scoping plan.
+This workCombine Publisher inspects a specific change context and generates a structured developer comment that translates code changes into clear functional updates, accompanied by a QA scoping plan.
 
 ## Steps
 1. **Context Intake**: Identify the source of information for the changes:
@@ -12,7 +12,7 @@ This workflow inspects a specific change context and generates a structured deve
    - **Last Conversation Response**: If asked to use the last response, audit the preceding message, any recent code modifications, or files touched in that step.
 2. **Analyze Changes**:
    - **Non-Technical Perspective**: What functional problem was solved? What does the user see or experience differently?
-   - **Technical Perspective**: Which layers (UI, ViewModel, Repository, Models, API) were changed? Identify the exact files modified.
+   - **Technical Perspective**: Which layers (UI, ObservableObject, Repository, Models, API) were changed? Identify the exact files modified.
    - **QA Scoping**: What setup, test cases, and regression areas are relevant to these modifications?
 3. **Draft Template**: Create the comment following this exact structure:
    - **Title**: `Dev Comment: [Brief Summary of the Change]`
