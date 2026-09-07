@@ -1,7 +1,6 @@
 # 02. Dependency Injection & Inversion of Control (IoC)
 
-- **Strict IoC Container Usage**: All services, repositories, and ViewModels **MUST** be resolved via an IoC container (e.g., `Dependency Injection`). 
-- **Zero Manual Instantiation**: Do not instantiate business logic classes directly using the `new` or `()` operator inside composables (e.g., `MyViewModel()`). Always use the injector `getIt<MyViewModel>()`.
-- **Code Generation**: Use `injectable` annotations (`@injectable`, `@singleton`, `@lazySingleton`) to map dependencies. Do not configure dependencies manually.
-- **Environment Targeting**: Use environment tags (e.g., `@Environment('dev')`, `@Environment('prod')`) to seamlessly swap out mock repositories or test services based on the build target.
-- **Decoupling**: SwiftUI Views must NEVER know about how a service is constructed or its dependencies. They only consume the interface.
+- **Strict IoC Enforcement**: All services, repositories, and ViewModels **MUST** be injected.
+- **Environment Object & Property Wrappers**: Use SwiftUI's `@EnvironmentObject` for global services or `@Environment(\.someService)` for scoped dependencies.
+- **Dependency Inversion**: SwiftUI Views must NEVER instantiate ViewModels directly if they rely on external dependencies. Construct them in the composition root (e.g., App struct) or factories and pass them down.
+- **Testability**: Use protocols (interfaces) for all services and repositories to enable easy mocking in XCTest.

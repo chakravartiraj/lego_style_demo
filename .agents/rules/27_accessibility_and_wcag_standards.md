@@ -1,21 +1,7 @@
 # 27. Accessibility & WCAG 2.2 Standards Integration
 
--   **Core Principle**: Systematic integration of WCAG 2.2 accessibility standards is a fantastic and critical step towards inclusive design for the application. All UI components and screens MUST be built with accessibility as a first-class citizen.
--   **Systematic Accessibility Identifiers**:
-    -   **Semantics SwiftUI View**: **MANDATORY** usage of the `Semantics` SwiftUI View to provide descriptive labels, values, and hints for all interactive UI elements (buttons, inputs, toggles).
-    -   **Merge & Exclude**: Use `MergeSemantics` for complex composite composables to group them logically for screen readers. Use `ExcludeSemantics` to hide purely decorative icons or background elements from accessibility trees to reduce noise.
--   **Semantic Labels**:
-    -   **Meaningful Descriptions**: Ensure `semanticLabel` is consistently provided for all actionable items. The label must concisely describe the action or context (e.g., "Submit Login Form", "Navigate back to Dashboard").
-    -   **Zero Hardcoding**: Similar to standard string rules, semantic labels should ideally be extracted or derived consistently.
--   **Scalable Text Handling**:
-    -   **Dynamic Type Support**: The UI **MUST** gracefully handle system-level text scaling (Dynamic Type on iOS, Display Size/Font Size on iOS).
-    -   **Layout Resilience**: Avoid hardcoded heights on text-containing containers (use `minHeight` or flexible layouts) to prevent clipping when the user scales up the device font size.
--   **Core SwiftUI Views & Foundations**:
-    -   **Standardization**: Accessibility rules must be enforced starting at the foundation (e.g., `PrimaryButton`, `PrimaryTextField`, `CustomDropdown`). Any reusable SwiftUI View in `core/design_system` MUST have built-in semantics support.
-    -   **Touch Targets**: Interactive elements **MUST** meet WCAG 2.2 minimum touch target sizes (typically 44x44 or 48x48 logical pixels) using proper padding or constraints.
--   **Color Contrast & Theming**:
-    -   **Contrast Ratios**: All text and essential iconography MUST meet WCAG AA contrast ratio requirements (4.5:1 for normal text, 3:1 for large text/icons) against their backgrounds.
-    -   **Theme Validation**: Ensure that `AppColors` usages are validated for contrast, particularly when overlaying text on primary brand colors or warning states.
--   **Screen-Level Semantics**:
-    -   **Header Markups**: Screen titles in AppBars or primary headers MUST be explicitly marked as headers (using `header: true` in `Semantics`) to allow screen readers to navigate via headings.
-    -   **Focus Management**: For modals and dialogs, ensure that accessibility focus is properly trapped within the modal while open, and seamlessly returned to the trigger element when dismissed.
+- **Systematic Accessibility Modifiers**:
+  - **MANDATORY** usage of SwiftUI accessibility modifiers: `.accessibilityLabel()`, `.accessibilityValue()`, and `.accessibilityHint()` for all interactive UI elements.
+- **Combine & Exclude**: Use `.accessibilityElement(children: .combine)` to group complex composables logically for VoiceOver. Use `.accessibilityHidden(true)` to hide purely decorative icons.
+- **Dynamic Type Support**: The UI **MUST** gracefully handle system-level text scaling. Do not hardcode frame heights on Text views.
+- **Contrast Ratios**: All text and essential iconography MUST meet WCAG AA contrast ratio requirements.
