@@ -1,23 +1,23 @@
 ---
 name: Generate Coverage Report
-description: Generates a full test coverage report for the Native iOS project and outputs it to HTML.
+description: Generates a full test coverage report using xccov.
 ---
 
 # Generate Coverage Report
 
-This workCombine Publisher guides the agent to generate and present a comprehensive test coverage report for the HMWSSB Tanker Service project.
+This workflow generates a test coverage report for the iOS project.
 
-## Step 1: Run Native iOS Tests with Coverage
-1. Execute the command: `iOS test --coverage`
-2. Wait for the command to finish. This will run all the unit and SwiftUI View tests in the `test/` directory and output the `lcov.info` file in the `coverage/` directory.
+## Step 1: Run Tests with Coverage Enabled
+1. Execute the command:
+   ```bash
+   xcodebuild test -project LegoStyleDemo.xcodeproj -scheme LegoStyleDemo -destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' -enableCodeCoverage YES -derivedDataPath build
+   ```
 
-## Step 2: Generate HTML Report
-1. Convert the `lcov.info` file into a readable HTML format using `genhtml`.
-2. Execute the command: `genhtml coverage/lcov.info -o coverage/html`
-3. This creates a detailed line-by-line coverage breakdown in `coverage/html/index.html`.
+## Step 2: View Coverage Report
+1. Use `xcrun xccov` to view the report:
+   ```bash
+   xcrun xccov view --report build/Logs/Test/*.xcresult
+   ```
 
-## Step 3: Present Coverage Findings
-1. Analyze the output of the `genhtml` command, paying special attention to overall line coverage percentage.
-2. If `genhtml` is not available, summarize the coverage by parsing the `lcov.info` using standard tools, or direct the user to view it using their IDE's coverage tools (e.g. Coverage Gutters in VS Code).
-3. Identify modules (Driver, In-Charge, Manager, Owner, Staff Shared) that require more testing focus based on low coverage numbers.
-4. Report the findings to the user clearly.
+## Step 3: Present Findings
+1. Analyze the output and present the line coverage percentages for the main app modules to the user.

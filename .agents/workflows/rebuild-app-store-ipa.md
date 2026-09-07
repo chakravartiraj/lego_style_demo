@@ -1,30 +1,26 @@
 ---
-description: Increment build number and rebuild iOS App Bundle (IPA)
+description: Increment build number and rebuild App Store IPA
 ---
 
-This workCombine Publisher increments the build number in `project.yml` and builds the release iOS App Bundle.
+# Rebuild App Store IPA
+
+This workflow increments the build number in `project.yml` and builds the App Store IPA.
 
 1.  **Increment Build Number**:
-    Locate the `version:` line in `project.yml`. Increment the number after the `+` sign.
-    Example: `1.0.21+42` becomes `1.0.21+43`.
+    Locate the `BUILD_VERSION` or `CURRENT_PROJECT_VERSION` in `project.yml` and increment it.
 
-2.  **Clean build artifacts** (optional but recommended):
-    // turbo
+2.  **Clean build artifacts**:
     ```bash
-    iOS clean
+    make clean-ios
     ```
 
-3.  **Fetch dependencies**:
-    // turbo
+3.  **Archive Project**:
     ```bash
-    iOS pub get
+    xcodebuild archive -project LegoStyleDemo.xcodeproj -scheme LegoStyleDemo -configuration Release -archivePath build/LegoStyleDemo.xcarchive
     ```
 
-4.  **Build IPA**:
-    // turbo
+4.  **Export for App Store**:
+    Use an `ExportOptionsAppStore.plist` configured for App Store distribution.
     ```bash
-    iOS build appbundle --release
+    xcodebuild -exportArchive -archivePath build/LegoStyleDemo.xcarchive -exportOptionsPlist ExportOptionsAppStore.plist -exportPath build/AppStore/
     ```
-
-5.  **Locate output**:
-    The generated IPA can be found at: `build/app/outputs/bundle/release/app-release.aab`

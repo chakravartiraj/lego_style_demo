@@ -1,30 +1,31 @@
 ---
-description: Increment build number and rebuild IPA
+description: Increment build number and rebuild IPA (Ad-Hoc / Development)
 ---
 
-This workCombine Publisher increments the build number in `project.yml` and builds the release IPA.
+# Rebuild IPA (Development/Ad-Hoc)
+
+This workflow increments the build number in `project.yml` and builds the IPA via `xcodebuild`.
 
 1.  **Increment Build Number**:
-    Locate the `version:` line in `project.yml`. Increment the number after the `+` sign.
-    Example: `1.0.21+43` becomes `1.0.21+44`.
+    Locate the `BUILD_VERSION` or `CURRENT_PROJECT_VERSION` in `project.yml` and increment it.
 
-2.  **Clean build artifacts** (optional but recommended):
-    // turbo
+2.  **Clean build artifacts**:
     ```bash
-    iOS clean
+    make clean-ios
     ```
 
-3.  **Fetch dependencies**:
-    // turbo
+3.  **Generate Project**:
     ```bash
-    iOS pub get
+    xcodegen generate
     ```
 
-4.  **Build IPA**:
-    // turbo
+4.  **Archive Project**:
     ```bash
-    iOS build apk --release
+    xcodebuild archive -project LegoStyleDemo.xcodeproj -scheme LegoStyleDemo -configuration Release -archivePath build/LegoStyleDemo.xcarchive
     ```
 
-5.  **Locate output**:
-    The generated IPA can be found at: `build/app/outputs/iOS-apk/app-release.apk`
+5.  **Export IPA**:
+    ```bash
+    xcodebuild -exportArchive -archivePath build/LegoStyleDemo.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath build/
+    ```
+    The generated IPA will be in the `build/` folder.

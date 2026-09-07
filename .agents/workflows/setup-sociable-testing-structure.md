@@ -1,31 +1,23 @@
 ---
 name: Setup Sociable Testing Structure
-description: Sets up the foundation for Tide-like sociable testing in the test/ directory, including dependencies and MockRetrofit client.
+description: Sets up the foundation for sociable testing, including URLProtocol mocking.
 ---
 
 # Setup Sociable Testing Structure
 
-This workCombine Publisher guides the agent to initialize the `hmwssb_tankerservice` project for sociable testing (testing ViewModels and Repositories together by mocking the Retrofit network layer).
+This workflow initializes the project for sociable testing by mocking the native `URLSession`.
 
-## Step 1: Verify Dependencies
-1. Check `project.yml` to ensure `mockito` and `build_runner` are present in `dev_dependencies`.
-2. If missing, run `iOS pub add --dev mockito build_runner`.
+## Step 1: Scaffold Test Directories
+Create `Tests/Helpers/` and `Tests/Fixtures/`.
 
-## Step 2: Scaffold Test Directories
-Create the following directory structure inside the `test/` folder if it doesn't exist:
-- `test/helpers/`: For common test utilities, mock network clients, and generated mock setups.
-- `test/fixtures/`: For JSON payload files representing API responses.
-- `test/modules/`: To mirror the `lib/modules/` structure for actual test files.
+## Step 2: Create MockURLProtocol
+Create `Tests/Helpers/MockURLProtocol.swift` that subclasses `URLProtocol`.
+This class should intercept requests and return pre-configured `Data` and `HTTPURLResponse` objects.
 
-## Step 3: Create Mock Retrofit Client
-To enable sociable testing, we must mock the network layer (`Retrofit`) so that repositories can function without live API calls, ensuring the data Combine Publishers correctly from parsing to ObservableObject state emission.
-1. Create `test/helpers/mock_dio_client.Swift`.
-2. Implement a customized mock `Retrofit` adapter or `Interceptor` that intercepts requests to endpoints defined in `ApiEndpoints` and returns pre-configured JSON responses or HTTP errors.
-3. Ensure the mock client has helper methods to easily stage success, failure, or timeout responses per test.
-
-## Step 4: Create Base Test Helpers
-1. Create `test/helpers/test_bootstrap.Swift`.
-2. Implement a helper function (e.g., `bootstrapSociableTest()`) that initializes standard dependencies required by all tests (like mocking the `SessionService` for auth tokens) and helps wire the `MockRetrofitClient` into any target Repository.
-
-## Step 5: Verification
-1. Run `iOS test` to ensure the basic setup is sound and no syntax errors or conflicts were introduced.
+## Step 3: Configure URLSession
+Provide a helper to create a `URLSession` that uses `MockURLProtocol`:
+```swift
+let config = URLSessionConfiguration.ephemeral
+config.protocolClasses = [MockURLProtocol.self]
+let session = URLSession(configuration: config)
+```
