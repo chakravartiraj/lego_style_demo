@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
 fun LegoApp() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "harry_potter") {
+    NavHost(navController = navController, startDestination = "lego_list") {
         composable("lego_list") {
             LegoListScreen(
                 onNavigateToHarryPotter = { navController.navigate("harry_potter") }

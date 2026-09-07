@@ -15,11 +15,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.foundation.clickable
 
+import androidx.compose.runtime.collectAsState
+
 @Composable
 fun LegoListScreen(
     viewModel: LegoListViewModel = hiltViewModel(),
     onNavigateToHarryPotter: () -> Unit = {}
 ) {
+    val universes = viewModel.universes.collectAsState().value
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -37,8 +41,16 @@ fun LegoListScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(6) { index ->
-                    LegoWorldCard("World $index", onClick = { onNavigateToHarryPotter() })
+                items(universes.size) { index ->
+                    val universe = universes[index]
+                    LegoWorldCard(
+                        universe = universe, 
+                        onClick = { 
+                            if (universe.id == "harry_potter") {
+                                onNavigateToHarryPotter()
+                            }
+                        }
+                    )
                 }
             }
         }
@@ -46,36 +58,52 @@ fun LegoListScreen(
 }
 
 @Composable
-fun LegoWorldCard(title: String, onClick: () -> Unit) {
+fun LegoWorldCard(universe: LegoUniverse, onClick: () -> Unit) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (universe.isAvailable) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = if (universe.isAvailable) 8.dp else 2.dp),
         shape = MaterialTheme.shapes.large,
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f)
-            .clickable { onClick() }
+            .then(
+                if (universe.isAvailable) Modifier.clickable { onClick() } else Modifier
+            )
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(8.dp)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Box(
                     modifier = Modifier
                         .size(64.dp)
-                        .background(MaterialTheme.colorScheme.secondary, shape = MaterialTheme.shapes.medium),
+                        .background(
+                            if (universe.isAvailable) MaterialTheme.colorScheme.secondary else Color.Gray, 
+                            shape = MaterialTheme.shapes.medium
+                        ),
                     contentAlignment = Alignment.Center
                 ) {
                     Text("LEGO", color = Color.White, fontWeight = FontWeight.Bold)
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = title,
+                    text = universe.title,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.White
+                    color = if (universe.isAvailable) Color.White else Color.LightGray,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
                 )
+                if (!universe.isAvailable) {
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "(coming soon)",
+                        fontSize = 12.sp,
+                        color = Color.Gray
+                    )
+                }
             }
         }
     }
