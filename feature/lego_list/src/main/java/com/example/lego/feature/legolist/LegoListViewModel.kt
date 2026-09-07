@@ -21,9 +21,9 @@ class LegoListViewModel @Inject constructor() : ViewModel() {
     init {
         _universes.value = listOf(
             LegoUniverse("harry_potter", "Harry Potter Universe", true),
-            LegoUniverse("star_war", "Star War Universe", false),
-            LegoUniverse("star_trek", "Star Trek Universe", false),
-            LegoUniverse("dragon_ball", "Dragon Ball-Z Universe", false)
+            LegoUniverse("star_wars", "Star War Universe", true),
+            LegoUniverse("star_trek", "Star Trek Universe", true),
+            LegoUniverse("dragon_ball", "Dragon Ball-Z Universe", true)
         )
     }
 }

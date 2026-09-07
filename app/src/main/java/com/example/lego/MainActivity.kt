@@ -13,8 +13,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lego.designsystem.LegoTheme
 import com.example.lego.feature.harrypotter.HarryPotterScreen
 import com.example.lego.feature.legolist.LegoListScreen
-import dagger.hilt.android.AndroidEntryPoint
 import com.example.lego.feature.harrypotter.HarryPotterDetailsScreen
+import com.example.lego.feature.starwars.StarWarsScreen
+import com.example.lego.feature.startrek.StarTrekScreen
+import com.example.lego.feature.dragonball.DragonBallScreen
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -35,8 +38,20 @@ fun LegoApp() {
     NavHost(navController = navController, startDestination = "lego_list") {
         composable("lego_list") {
             LegoListScreen(
-                onNavigateToHarryPotter = { navController.navigate("harry_potter") }
+                onNavigateToHarryPotter = { navController.navigate("harry_potter") },
+                onNavigateToStarWars = { navController.navigate("star_wars") },
+                onNavigateToStarTrek = { navController.navigate("star_trek") },
+                onNavigateToDragonBall = { navController.navigate("dragon_ball") }
             )
+        }
+        composable("star_wars") {
+            StarWarsScreen()
+        }
+        composable("star_trek") {
+            StarTrekScreen()
+        }
+        composable("dragon_ball") {
+            DragonBallScreen()
         }
         composable("harry_potter") {
             HarryPotterScreen(

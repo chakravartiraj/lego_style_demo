@@ -20,7 +20,10 @@ import androidx.compose.runtime.collectAsState
 @Composable
 fun LegoListScreen(
     viewModel: LegoListViewModel = hiltViewModel(),
-    onNavigateToHarryPotter: () -> Unit = {}
+    onNavigateToHarryPotter: () -> Unit = {},
+    onNavigateToStarWars: () -> Unit = {},
+    onNavigateToStarTrek: () -> Unit = {},
+    onNavigateToDragonBall: () -> Unit = {}
 ) {
     val universes = viewModel.universes.collectAsState().value
 
@@ -46,8 +49,11 @@ fun LegoListScreen(
                     LegoWorldCard(
                         universe = universe, 
                         onClick = { 
-                            if (universe.id == "harry_potter") {
-                                onNavigateToHarryPotter()
+                            when (universe.id) {
+                                "harry_potter" -> onNavigateToHarryPotter()
+                                "star_wars" -> onNavigateToStarWars()
+                                "star_trek" -> onNavigateToStarTrek()
+                                "dragon_ball" -> onNavigateToDragonBall()
                             }
                         }
                     )
