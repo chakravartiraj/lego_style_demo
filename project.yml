@@ -1,0 +1,14 @@
+name: LegoStyleDemo
+options:
+  bundleIdPrefix: com.example.lego
+targets:
+  LegoStyleDemo:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources
+    info:
+      path: Info.plist
+      properties:
+        UILaunchScreen: {}

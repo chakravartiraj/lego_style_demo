@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3CC0BCD28131441CFA7B4770 /* LegoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9191C63E7FFF2F91A62B17A /* LegoListViewModel.swift */; };
+		3F19E48933BBE5CA98EC5FA6 /* HarryPotterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24E64E5AE104E367BAD211 /* HarryPotterView.swift */; };
+		6FC42AF79D7AE33C6B5988D1 /* LegoStyleDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD04ACA7029B21AB3CB95793 /* LegoStyleDemoApp.swift */; };
+		77F061CCF3F44CFED80D7BC1 /* LegoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F734CC941B2F3F6E7686797 /* LegoListView.swift */; };
+		7B7838C66C5FC2AF23A1C7B4 /* StarWarsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B069E1D6F1456E5C26620713 /* StarWarsViewModel.swift */; };
+		7DE081486CF3272DF282F59D /* DragonBallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF292E8C1878B080150A90 /* DragonBallViewModel.swift */; };
+		812D4E21290BB2051F3173F8 /* StarWarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDFEA22F087FDCDAA794786 /* StarWarsView.swift */; };
+		D6D7007EC8B016BAC3144A5C /* HarryPotterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F6000477697111998D3C83 /* HarryPotterViewModel.swift */; };
+		DAFD05A01A044515CF7DB964 /* StarTrekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7AE31809EA13B57C7E60D /* StarTrekViewModel.swift */; };
+		DCF06D63ECE4F8E6637A2A74 /* StarTrekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6A577E37CB8497AAB1C333 /* StarTrekView.swift */; };
+		E81D537120B1458D66422687 /* DragonBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A908464176FD5A4F858230 /* DragonBallView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01F6000477697111998D3C83 /* HarryPotterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarryPotterViewModel.swift; sourceTree = "<group>"; };
+		28CF292E8C1878B080150A90 /* DragonBallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallViewModel.swift; sourceTree = "<group>"; };
+		5CDFEA22F087FDCDAA794786 /* StarWarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsView.swift; sourceTree = "<group>"; };
+		5D24E64E5AE104E367BAD211 /* HarryPotterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarryPotterView.swift; sourceTree = "<group>"; };
+		6DEF38182B56460317E4B373 /* LegoStyleDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LegoStyleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F734CC941B2F3F6E7686797 /* LegoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoListView.swift; sourceTree = "<group>"; };
+		99A908464176FD5A4F858230 /* DragonBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallView.swift; sourceTree = "<group>"; };
+		A8D7AE31809EA13B57C7E60D /* StarTrekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarTrekViewModel.swift; sourceTree = "<group>"; };
+		B069E1D6F1456E5C26620713 /* StarWarsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsViewModel.swift; sourceTree = "<group>"; };
+		CA6A577E37CB8497AAB1C333 /* StarTrekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarTrekView.swift; sourceTree = "<group>"; };
+		E9191C63E7FFF2F91A62B17A /* LegoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoListViewModel.swift; sourceTree = "<group>"; };
+		FD04ACA7029B21AB3CB95793 /* LegoStyleDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoStyleDemoApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		4A7C51F0C5915490743FF4C4 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FD04ACA7029B21AB3CB95793 /* LegoStyleDemoApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		763A93B8039DC6C5BE084150 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				957FD4636FB116E479D98E10 /* DragonBall */,
+				F78F958BE15D5D96E9B685A9 /* HarryPotter */,
+				8546D2CD55F6391AA1728877 /* LegoList */,
+				D768DA9678A7E517CA02DFAB /* StarTrek */,
+				C9AB8741D4719642DD248FD3 /* StarWars */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		8546D2CD55F6391AA1728877 /* LegoList */ = {
+			isa = PBXGroup;
+			children = (
+				7F734CC941B2F3F6E7686797 /* LegoListView.swift */,
+				E9191C63E7FFF2F91A62B17A /* LegoListViewModel.swift */,
+			);
+			path = LegoList;
+			sourceTree = "<group>";
+		};
+		957FD4636FB116E479D98E10 /* DragonBall */ = {
+			isa = PBXGroup;
+			children = (
+				99A908464176FD5A4F858230 /* DragonBallView.swift */,
+				28CF292E8C1878B080150A90 /* DragonBallViewModel.swift */,
+			);
+			path = DragonBall;
+			sourceTree = "<group>";
+		};
+		C9AB8741D4719642DD248FD3 /* StarWars */ = {
+			isa = PBXGroup;
+			children = (
+				5CDFEA22F087FDCDAA794786 /* StarWarsView.swift */,
+				B069E1D6F1456E5C26620713 /* StarWarsViewModel.swift */,
+			);
+			path = StarWars;
+			sourceTree = "<group>";
+		};
+		CB4374FDEE1068B1DF493323 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4A7C51F0C5915490743FF4C4 /* App */,
+				763A93B8039DC6C5BE084150 /* Features */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		D5FB55A4811AA949CDE5535D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DEF38182B56460317E4B373 /* LegoStyleDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D768DA9678A7E517CA02DFAB /* StarTrek */ = {
+			isa = PBXGroup;
+			children = (
+				CA6A577E37CB8497AAB1C333 /* StarTrekView.swift */,
+				A8D7AE31809EA13B57C7E60D /* StarTrekViewModel.swift */,
+			);
+			path = StarTrek;
+			sourceTree = "<group>";
+		};
+		F6E35276AB5AA59A8F227F02 = {
+			isa = PBXGroup;
+			children = (
+				CB4374FDEE1068B1DF493323 /* Sources */,
+				D5FB55A4811AA949CDE5535D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F78F958BE15D5D96E9B685A9 /* HarryPotter */ = {
+			isa = PBXGroup;
+			children = (
+				5D24E64E5AE104E367BAD211 /* HarryPotterView.swift */,
+				01F6000477697111998D3C83 /* HarryPotterViewModel.swift */,
+			);
+			path = HarryPotter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		017CD27726603A8E2F789AF7 /* LegoStyleDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B813D68A8374DDA523A649B /* Build configuration list for PBXNativeTarget "LegoStyleDemo" */;
+			buildPhases = (
+				7AC6DBBA379AD5D9964944EC /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LegoStyleDemo;
+			packageProductDependencies = (
+			);
+			productName = LegoStyleDemo;
+			productReference = 6DEF38182B56460317E4B373 /* LegoStyleDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63A06B0F17A12B3568067CCE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 6F5BD0943745D1FB35AAA842 /* Build configuration list for PBXProject "LegoStyleDemo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F6E35276AB5AA59A8F227F02;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D5FB55A4811AA949CDE5535D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				017CD27726603A8E2F789AF7 /* LegoStyleDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7AC6DBBA379AD5D9964944EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E81D537120B1458D66422687 /* DragonBallView.swift in Sources */,
+				7DE081486CF3272DF282F59D /* DragonBallViewModel.swift in Sources */,
+				3F19E48933BBE5CA98EC5FA6 /* HarryPotterView.swift in Sources */,
+				D6D7007EC8B016BAC3144A5C /* HarryPotterViewModel.swift in Sources */,
+				77F061CCF3F44CFED80D7BC1 /* LegoListView.swift in Sources */,
+				3CC0BCD28131441CFA7B4770 /* LegoListViewModel.swift in Sources */,
+				6FC42AF79D7AE33C6B5988D1 /* LegoStyleDemoApp.swift in Sources */,
+				DCF06D63ECE4F8E6637A2A74 /* StarTrekView.swift in Sources */,
+				DAFD05A01A044515CF7DB964 /* StarTrekViewModel.swift in Sources */,
+				812D4E21290BB2051F3173F8 /* StarWarsView.swift in Sources */,
+				7B7838C66C5FC2AF23A1C7B4 /* StarWarsViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1F3B5AFA37DD435239C82448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.lego.LegoStyleDemo;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9039FEA46A1584B93BEEC6ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.lego.LegoStyleDemo;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B92502B7CE3E622EBC8FA144 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E8F51BC68AEB6B9666081DFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F5BD0943745D1FB35AAA842 /* Build configuration list for PBXProject "LegoStyleDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B92502B7CE3E622EBC8FA144 /* Debug */,
+				E8F51BC68AEB6B9666081DFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9B813D68A8374DDA523A649B /* Build configuration list for PBXNativeTarget "LegoStyleDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F3B5AFA37DD435239C82448 /* Debug */,
+				9039FEA46A1584B93BEEC6ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63A06B0F17A12B3568067CCE /* Project object */;
+}
