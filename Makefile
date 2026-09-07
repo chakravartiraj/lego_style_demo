@@ -13,6 +13,7 @@ help:
 	@echo "  make build-apk-release - Build the release APK"
 	@echo "  make build-aab-debug   - Build the debug App Bundle (AAB)"
 	@echo "  make build-aab-release - Build the release App Bundle (AAB)"
+	@echo "  make build-interactive - Interactive prompt to select build type/variant"
 	@echo "  make lint              - Run Android static analysis (lint)"
 	@echo "  make test              - Run unit tests across all modules"
 	@echo "  make clean             - Clean the build directory"
@@ -36,6 +37,31 @@ build-aab-debug:
 build-aab-release:
 	@echo "🚀 Building release AAB..."
 	./gradlew bundleRelease
+
+build-interactive:
+	@echo "Which format do you want to build?"
+	@echo "1. APK"
+	@echo "2. AAB"
+	@read -p "Enter choice (1/2): " format; \
+	echo "Which variant do you want to build?"; \
+	echo "1. Debug"; \
+	echo "2. Release"; \
+	read -p "Enter choice (1/2): " variant; \
+	if [ "$$format" = "1" ] && [ "$$variant" = "1" ]; then \
+		echo "🔨 Building debug APK..."; \
+		./gradlew assembleDebug; \
+	elif [ "$$format" = "1" ] && [ "$$variant" = "2" ]; then \
+		echo "📦 Building release APK..."; \
+		./gradlew assembleRelease; \
+	elif [ "$$format" = "2" ] && [ "$$variant" = "1" ]; then \
+		echo "📦 Building debug AAB..."; \
+		./gradlew bundleDebug; \
+	elif [ "$$format" = "2" ] && [ "$$variant" = "2" ]; then \
+		echo "🚀 Building release AAB..."; \
+		./gradlew bundleRelease; \
+	else \
+		echo "❌ Invalid choice."; \
+	fi
 
 lint:
 	@echo "🔍 Running Android static analysis..."
