@@ -24,6 +24,7 @@ import androidx.compose.foundation.clickable
 @Composable
 fun HarryPotterScreen(
     viewModel: HarryPotterViewModel = hiltViewModel(),
+    showBackButton: Boolean = true,
     onNavigateBack: () -> Unit = {},
     onCharacterClick: (String) -> Unit = {}
 ) {
@@ -34,12 +35,14 @@ fun HarryPotterScreen(
             TopAppBar(
                 title = { Text("Harry Potter Universe", color = Color.White, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
-                        )
+                    if (showBackButton) {
+                        IconButton(onClick = onNavigateBack) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.White
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

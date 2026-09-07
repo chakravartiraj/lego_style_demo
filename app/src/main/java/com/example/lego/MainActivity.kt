@@ -40,6 +40,7 @@ fun LegoApp() {
         }
         composable("harry_potter") {
             HarryPotterScreen(
+                showBackButton = navController.previousBackStackEntry != null,
                 onNavigateBack = { navController.popBackStack() },
                 onCharacterClick = { characterId ->
                     navController.navigate("harry_potter_details/$characterId")
