@@ -63,4 +63,8 @@ create-emulator:
 run-android:
 	@echo "🚀 Installing and Launching App on connected device/emulator..."
 	./gradlew installDebug
+	$(ANDROID_HOME)/platform-tools/adb logcat -c
 	$(ANDROID_HOME)/platform-tools/adb shell am start -n com.example.lego/.MainActivity
+	@echo "📡 Attaching to logcat... (Press Ctrl+C to stop)"
+	@sleep 1
+	$(ANDROID_HOME)/platform-tools/adb logcat --pid=$$($(ANDROID_HOME)/platform-tools/adb shell pidof -s com.example.lego)
