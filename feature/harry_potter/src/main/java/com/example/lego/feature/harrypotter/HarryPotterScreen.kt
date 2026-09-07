@@ -14,15 +14,21 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+
+import androidx.compose.runtime.collectAsState
+import androidx.compose.foundation.clickable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HarryPotterScreen(
     viewModel: HarryPotterViewModel = hiltViewModel(),
-    onNavigateBack: () -> Unit = {}
+    onNavigateBack: () -> Unit = {},
+    onCharacterClick: (String) -> Unit = {}
 ) {
+    val characters = viewModel.characters.collectAsState().value
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -30,7 +36,7 @@ fun HarryPotterScreen(
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
                             tint = Color.White
                         )
@@ -53,20 +59,23 @@ fun HarryPotterScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            items(5) { index ->
-                HPCharacterCard("Character $index")
+            items(characters.size) { index ->
+                val character = characters[index]
+                HPCharacterCard(character, onClick = { onCharacterClick(character.id) })
             }
         }
     }
 }
 
 @Composable
-fun HPCharacterCard(name: String) {
+fun HPCharacterCard(character: HPCharacter, onClick: () -> Unit) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         shape = MaterialTheme.shapes.large,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -81,12 +90,19 @@ fun HPCharacterCard(name: String) {
                 Text("HP", color = Color.White, fontWeight = FontWeight.Bold)
             }
             Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = name,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.White
-            )
+            Column {
+                Text(
+                    text = character.name,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+                Text(
+                    text = character.house,
+                    fontSize = 14.sp,
+                    color = Color.LightGray
+                )
+            }
         }
     }
 }

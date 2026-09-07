@@ -14,6 +14,7 @@ import com.example.lego.designsystem.LegoTheme
 import com.example.lego.feature.harrypotter.HarryPotterScreen
 import com.example.lego.feature.legolist.LegoListScreen
 import dagger.hilt.android.AndroidEntryPoint
+import com.example.lego.feature.harrypotter.HarryPotterDetailsScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -21,19 +22,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LegoTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    LegoAppNavigation()
-                }
+                LegoApp()
             }
         }
     }
 }
 
 @Composable
-fun LegoAppNavigation() {
+fun LegoApp() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "lego_list") {
+    NavHost(navController = navController, startDestination = "harry_potter") {
         composable("lego_list") {
             LegoListScreen(
                 onNavigateToHarryPotter = { navController.navigate("harry_potter") }
@@ -41,6 +40,16 @@ fun LegoAppNavigation() {
         }
         composable("harry_potter") {
             HarryPotterScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onCharacterClick = { characterId ->
+                    navController.navigate("harry_potter_details/$characterId")
+                }
+            )
+        }
+        composable("harry_potter_details/{characterId}") { backStackEntry ->
+            val characterId = backStackEntry.arguments?.getString("characterId") ?: return@composable
+            HarryPotterDetailsScreen(
+                characterId = characterId,
                 onNavigateBack = { navController.popBackStack() }
             )
         }
