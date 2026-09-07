@@ -7,7 +7,7 @@ help:
 	@echo "  make clean-ios       - Clean the iOS build"
 
 build-ios:
-	xcodebuild -project LegoStyleDemo.xcodeproj -scheme LegoStyleDemo -destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' build
+	xcodebuild -project LegoStyleDemo.xcodeproj -scheme LegoStyleDemo -destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' -derivedDataPath build build
 
 run-ios: build-ios
 	xcrun simctl boot "iPhone 13 Pro Max" || true
