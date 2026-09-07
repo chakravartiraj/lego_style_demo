@@ -1,46 +1,45 @@
-# 🧩 Core Principles of Lego Architecture (Android Edition)
+# 🧩 Core Principles of Lego Architecture (iOS Edition)
 
-This project strictly adheres to the **Lego Architecture**, translating the highly modular approach originally proposed for Flutter into a **Native Android Gradle Multi-Module** environment.
+This project strictly adheres to the **Lego Architecture**, translating the highly modular approach into a **Native iOS XcodeGen Multi-Target** environment.
 
-The goal of Lego Architecture is to break down a monolithic Android app into isolated, self-contained, and highly reusable building blocks (Gradle modules).
+The goal of Lego Architecture is to break down a monolithic iOS app into isolated, self-contained, and highly reusable building blocks.
 
 ## 1. The Monorepo Structure
 
-Instead of one giant `app/` module with endless packages, the codebase is divided into independent Gradle modules.
+Instead of one giant target with endless folders, the codebase is logically divided into independent module boundaries.
 
-### 🏢 `:app` (The Baseplate)
-The `:app` module contains the application shell (e.g., `MainActivity`, `Application` class).
+### 🏢 `App` (The Baseplate)
+The `App` module contains the application shell (e.g., `@main struct LegoStyleDemoApp: App`).
 Think of this as the green baseplate you build Lego sets on. It contains almost **zero business logic**. Its sole responsibility is to:
-1. Initialize the app environment (e.g., `@HiltAndroidApp`).
-2. Register dependencies (Hilt Modules/Components).
-3. Wire together routing (Jetpack Navigation / Compose Navigation).
+1. Initialize the app environment.
+2. Register global dependencies (e.g., via `@StateObject`).
+3. Wire together routing (`NavigationStack`).
 4. Assemble the various feature blocks into a unified UI.
 
-### ⚙️ `:core` (The Technical Bricks)
-The `:core` namespace houses Android libraries that handle purely technical, non-UI infrastructure.
+### ⚙️ `Core` (The Technical Bricks)
+The `Core` namespace houses Swift files that handle purely technical, non-UI infrastructure.
 Examples: 
-- `:core:testing` (Sociable testing utilities, MockWebServer wrappers)
-- `:core:network` (Retrofit/OkHttp clients)
-- `:core:design_system` (Material 3 Typography, colors, common Compose widgets)
+- `Network` (URLSession clients)
+- `DesignSystem` (Typography, colors, common SwiftUI widgets)
 
-### ✨ `:feature` (The Lego Blocks)
-This is where the magic happens. Every single feature of the app is an **isolated Android Library module** inside the `:feature` namespace.
+### ✨ `Features` (The Lego Blocks)
+This is where the magic happens. Every single feature of the app is an **isolated folder/target** inside the `Features` namespace.
 Examples:
-- `:feature:lego_list`
-- `:feature:harry_potter`
+- `LegoList`
+- `HarryPotter`
 
 ## 2. The Golden Rules of a Lego Block
 
 A feature module (Lego block) must be completely self-contained. It should have its own:
-- **UI / Presentation Layer**: Jetpack Compose screens specific to this feature.
-- **State Management**: Android `ViewModel` and `StateFlow`.
+- **UI / Presentation Layer**: SwiftUI screens specific to this feature.
+- **State Management**: `ObservableObject` and `@Published`.
 - **Data Layer**: Repositories and Data Sources.
 
 ### 🚫 Strict Isolation Boundaries
-- **Rule 1**: A Lego block in `:feature` **cannot** depend on another Lego block in `:feature`. 
-- **Rule 2**: If two blocks need to communicate, they must do so via Interfaces, Shared State (via `:core`), or Deep Links/Routing managed by `:app`.
+- **Rule 1**: A Lego block in `Features` **cannot** strongly depend on another Lego block in `Features` without a protocol boundary. 
+- **Rule 2**: If two blocks need to communicate, they must do so via Interfaces, Shared State (via `Core`), or Routing managed by `App`.
 - **Rule 3**: Lego blocks must never assume they are running inside a specific app. They should be agnostic, allowing them to be plugged into a different App Shell seamlessly.
 
 ## 3. Dependency Injection (Wiring the Blocks)
 Lego blocks expose their dependencies, but they don't fulfill them globally. 
-The App Shell (`:app`) uses a Service Locator/DI Framework (like **Hilt/Dagger**) to inject the `:core:network` dependencies into the `:feature` blocks at runtime using `@Inject` and `@AndroidEntryPoint`.
+The App Shell (`App`) injects dependencies (like the network client) into the `Features` blocks at runtime using standard init injection or `@EnvironmentObject`.

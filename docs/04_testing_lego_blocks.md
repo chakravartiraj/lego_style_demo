@@ -1,66 +1,52 @@
 # 🧪 Testing Lego Blocks
 
-Because Lego Architecture isolates features into self-contained Gradle modules, testing them becomes incredibly straightforward. We heavily rely on **Sociable Unit Testing** for architecture validation.
+Because Lego Architecture isolates features into self-contained modules, testing them becomes incredibly straightforward. We heavily rely on **Sociable Unit Testing** for architecture validation.
 
 ## Sociable Testing
 
-Sociable tests validate that the Compose UI, ViewModel, and Repository layers interact correctly, without mocking anything *except* the extreme outer boundary (the Network layer).
+Sociable tests validate that the SwiftUI View, ViewModel, and Repository layers interact correctly, without mocking anything *except* the extreme outer boundary (the Network layer).
 
-### The `:core:testing` Module
-We utilize a shared `:core:testing` module across the monorepo to prevent mocking boilerplate.
-It provides:
-- `MockWebServer` configurations to act as a local interceptor.
-- `TestBootstrap.kt`: Initialization logic for standard dependencies.
+### The `URLProtocol` Mocking
+We utilize native `URLProtocol` subclasses to intercept `URLSession` requests locally, preventing live network calls while allowing the entire network stack to be tested.
 
 ### Writing a Sociable Test
 
-1. Create your test file inside `feature/your_feature/src/test/java/...`.
-2. Boot up the `MockWebServer`.
+1. Create your test file inside `Tests/Modules/`.
+2. Configure a `URLSession` using your custom `MockURLProtocol`.
 3. Configure JSON fixtures to simulate backend responses.
-4. Execute the ViewModel or Repository logic (or launch the Composable using Robolectric/Paparazzi) and verify the state transitions.
+4. Execute the ViewModel or Repository logic and verify the state transitions.
 
-```kotlin
-import okhttp3.mockwebserver.MockWebServer
-import okhttp3.mockwebserver.MockResponse
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-import org.junit.Assert.assertEquals
+```swift
+import XCTest
+@testable import LegoStyleDemo
 
-class FeatureSociableTest {
-    private lateinit var mockWebServer: MockWebServer
-    private lateinit var repository: FeatureRepository
+final class FeatureSociableTests: XCTestCase {
+    var repository: FeatureRepository!
 
-    @Before
-    fun setUp() {
-        mockWebServer = MockWebServer()
-        mockWebServer.start()
+    override func setUpWithError() throws {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [MockURLProtocol.self]
+        let session = URLSession(configuration: config)
         
-        // Inject the mock server's base URL into the Repository/Retrofit client
-        repository = FeatureRepositoryImpl(baseUrl = mockWebServer.url("/").toString())
+        repository = FeatureRepository(session: session)
     }
 
-    @After
-    fun tearDown() {
-        mockWebServer.shutdown()
-    }
-
-    @Test
-    fun `Feature successfully fetches data via mocked network`() = runTest {
+    func testFeatureSuccessfullyFetchesData() async throws {
         // Arrange
-        val mockResponse = MockResponse()
-            .setResponseCode(200)
-            .setBody("""{"status": "ok"}""")
-        mockWebServer.enqueue(mockResponse)
+        let jsonResponse = "{"status": "ok"}".data(using: .utf8)!
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, jsonResponse)
+        }
 
         // Act
-        val result = repository.fetchData()
+        let result = try await repository.fetchData()
 
         // Assert
-        assertEquals("ok", result.status)
+        XCTAssertEqual(result.status, "ok")
     }
 }
 ```
 
 > [!TIP]
-> Always place dummy JSON responses inside `src/test/resources/fixtures/` and load them into your `MockResponse` bodies to perfectly simulate the live backend!
+> Always place dummy JSON responses inside `Tests/Fixtures/` and load them into your `MockURLProtocol` bodies to perfectly simulate the live backend!

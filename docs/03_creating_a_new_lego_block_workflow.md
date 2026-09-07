@@ -1,68 +1,55 @@
 # 🏗 Workflow: Creating a New Lego Block
 
-Whenever you are tasked with building a new feature, follow this workflow to create a perfectly architected Lego Block in the Android Gradle environment.
+Whenever you are tasked with building a new feature, follow this workflow to create a perfectly architected Lego Block in the iOS environment.
 
-## Step 1: Scaffold the Module
-Navigate to the `feature/` directory and create a new Android Library module (or use the Android Studio UI: File -> New -> New Module -> Android Library).
+## Step 1: Scaffold the Directory
+Navigate to the `Sources/Features/` directory and create a new folder for your feature.
 ```bash
-mkdir -p feature/feature_name/src/main/java/com/example/lego/feature/featurename
+mkdir -p Sources/Features/NewFeature
 ```
 
-## Step 2: Configure `build.gradle.kts`
-Inside your new feature module, create the `build.gradle.kts` and add the standard Lego Stack:
-```kotlin
-plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    // id("com.google.dagger.hilt.android") // Add when Hilt is enabled
-}
+## Step 2: Configure `project.yml`
+Open `project.yml` at the root of the project. If you are separating features by actual Xcode targets, define your new target here. (Alternatively, if using a single target monorepo approach, ensure the source files are tracked under the main target).
 
-android {
-    namespace = "com.example.lego.feature.featurename"
-    // ... basic android config
-    buildFeatures { compose = true }
-}
-
-dependencies {
-    implementation(project(":core:design_system"))
-    
-    // Compose
-    implementation(platform("androidx.compose:compose-bom:2024.02.01"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3")
-    
-    // ViewModel & Hilt
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    // implementation("com.google.dagger:hilt-android:2.51")
-}
+```yaml
+targets:
+  LegoStyleDemo:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: [Sources]
 ```
 
 ## Step 3: Architect the Block Internals
-Inside your new feature package (`src/main/java/com/.../featurename/`), structure the code using standard Clean Architecture/MVVM patterns:
-- `ui/` (Compose Screens, ViewModels)
-- `domain/` (Use Cases, Domain Models)
-- `data/` (Repositories, DTOs, API Interfaces)
+Inside your new feature folder (`Sources/Features/NewFeature/`), structure the code using standard MVVM patterns:
+- `NewFeatureView.swift` (SwiftUI Screen)
+- `NewFeatureViewModel.swift` (ObservableObject)
+- `NewFeatureRepository.swift` (Data layer)
 
-*Note: Keep internal implementation details package-private or `internal`. Only expose what the App Shell needs in the root of the module.*
+*Note: Keep internal implementation details `private` or `internal` (default in Swift). Only expose what the App Shell needs public.*
 
 ## Step 4: Expose the API Boundary
-In your feature module, export **only** the Composables or interfaces the App Shell needs to know about (usually just the main Screen Composable).
-```kotlin
-package com.example.lego.feature.featurename
+In your feature module, export **only** the Views or interfaces the App Shell needs to know about.
+```swift
+import SwiftUI
 
-import androidx.compose.runtime.Composable
-
-@Composable
-fun FeatureNameScreen(viewModel: FeatureNameViewModel = hiltViewModel()) {
-    // Implementation details hidden inside module
+public struct NewFeatureView: View {
+    @StateObject private var viewModel: NewFeatureViewModel
+    
+    public init(repository: NewFeatureRepositoryProtocol) {
+        _viewModel = StateObject(wrappedValue: NewFeatureViewModel(repository: repository))
+    }
+    
+    public var body: some View {
+        // Implementation details hidden inside module
+        Text("Hello New Feature")
+    }
 }
 ```
 
 ## Step 5: Wire it to the App Shell
-Finally, navigate to `app/build.gradle.kts` and add your new feature as a dependency:
-```kotlin
-dependencies {
-    implementation(project(":feature:feature_name"))
-}
+Finally, navigate to `Sources/App/LegoStyleDemoApp.swift` (or your router) and add your new feature to the `NavigationStack`:
+```swift
+NavigationLink("Go to New Feature", value: Route.newFeature)
 ```
-Then, register its routes in the app's `NavHost` configuration and ensure any required Hilt modules are installed in `SingletonComponent` within `:app`.
+Then, register its route in the `.navigationDestination(for:)` block.
