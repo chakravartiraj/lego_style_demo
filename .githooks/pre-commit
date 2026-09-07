@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 #
-# Pre-commit hook to enforce Tide standards for Android Jetpack Compose
+# Pre-commit hook to enforce standards for iOS SwiftUI
 
 echo "---------------------------------------"
-echo "Running Pre-commit Checks (Android Compose)"
+echo "Running Pre-commit Checks (iOS SwiftUI)"
 echo "---------------------------------------"
 
-if [ -f "gradlew" ]; then
-    echo "🤖 Running Android static analysis and tests..."
-    ./gradlew lint testDebugUnitTest || {
-        echo "❌ Pre-commit failed: Android Gradle checks failed."
-        echo "Please fix the failing Android tests/lints and try committing again."
-        # exit 1 
-        # Commenting out exit 1 temporarily because the gradlew script doesn't exist yet!
+if [ -f "LegoStyleDemo.xcodeproj/project.pbxproj" ]; then
+    echo "🍏 Running iOS compilation checks..."
+    make build-ios > /dev/null || {
+        echo "❌ Pre-commit failed: iOS Xcode build failed."
+        echo "Please fix the failing Swift compilation errors and try committing again."
+        exit 1 
     }
 fi
 
