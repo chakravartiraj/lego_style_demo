@@ -19,6 +19,7 @@ import com.example.lego.feature.starwars.StarWarsDetailsScreen
 import com.example.lego.feature.startrek.StarTrekScreen
 import com.example.lego.feature.startrek.StarTrekDetailsScreen
 import com.example.lego.feature.dragonball.DragonBallScreen
+import com.example.lego.feature.dragonball.DragonBallDetailsScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,7 +80,20 @@ fun LegoApp() {
             )
         }
         composable("dragon_ball") {
-            DragonBallScreen()
+            DragonBallScreen(
+                showBackButton = navController.previousBackStackEntry != null,
+                onNavigateBack = { navController.popBackStack() },
+                onCharacterClick = { characterId ->
+                    navController.navigate("dragon_ball_details/$characterId")
+                }
+            )
+        }
+        composable("dragon_ball_details/{characterId}") { backStackEntry ->
+            val characterId = backStackEntry.arguments?.getString("characterId") ?: return@composable
+            DragonBallDetailsScreen(
+                characterId = characterId,
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
         composable("harry_potter") {
             HarryPotterScreen(
