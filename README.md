@@ -1,71 +1,64 @@
-# Lego Style Demo (Android Compose Port)
+# Lego Style Demo (Native iOS SwiftUI Edition)
 
-Welcome to the **Lego Style Demo** project! This branch exclusively follows a modular, multi-package architecture (often referred to as a "Multi-Module Gradle Architecture") to keep code separated by features and domains, much like building with Lego blocks. It is written completely natively in Kotlin utilizing Jetpack Compose for the UI layer.
+Welcome to the **Lego Style Demo** project! This branch exclusively follows a modular, feature-based architecture (often referred to as "Lego Architecture") to keep code separated by features and domains, much like building with Lego blocks. It is written completely natively in Swift utilizing SwiftUI for the UI layer and XcodeGen for project generation.
 
 ## Project Structure
 
-This repository is split into several local Gradle subprojects instead of a single massive Android app module. You can find them defined in `settings.gradle.kts` under these main directories:
+This repository is split into distinct source directories instead of a single massive Xcode group. You can find them defined in `project.yml` under these main directories:
 
-*   **`:app`**: Contains the main application entry point, global dependency injection (Hilt) configuration, and top-level Compose Navigation graphs. **This is the module you deploy to a device.**
-*   **`:core`**: Reusable code that is not tied to a specific feature.
-    *   `design_system`: Android Library module containing the Jetpack Compose `MaterialTheme` components, color schemes (like our Sleek Dark Mode), and shared assets used across the app.
-*   **`:feature`**: Individual, self-contained feature packages.
-    *   `harry_potter`: Android Library module containing the logic, state (ViewModels), and Compose UI related to the Harry Potter feature.
-    *   `lego_list`: Android Library module containing the logic, state (ViewModels), and Compose UI related to the Lego List feature.
+*   **`Sources/App`**: Contains the main application entry point (`@main App`), global dependency injection (@StateObject/Environment) configuration, and top-level NavigationStack routing. **This is the main target you deploy to a device.**
+*   **`Sources/Core`**: Reusable code that is not tied to a specific feature.
+    *   `DesignSystem`: Contains the SwiftUI components, color schemes (like our Sleek Dark Mode), and shared assets used across the app.
+    *   `Network`: URLSession clients, API definitions, and models.
+*   **`Sources/Features`**: Individual, self-contained feature packages.
+    *   `HarryPotter`: Module containing the logic, state (ObservableObjects), and SwiftUI UI related to the Harry Potter feature.
+    *   `LegoList`: Module containing the logic, state (ObservableObjects), and SwiftUI UI related to the Lego List feature.
 
 ## Getting Started
 
-Because this is a multi-module project, Gradle manages all the dependencies for you from the root `settings.gradle.kts` and `build.gradle.kts` files.
+Because this project dynamically generates its `.xcodeproj` file to prevent merge conflicts, you will use `XcodeGen` and our root `Makefile` to get started.
 
-### 1. IDE Setup
-1. Open **Android Studio**.
-2. Select **File > Open...** and select the root directory of this repository (the folder containing `settings.gradle.kts`).
-3. Allow Gradle to perform its initial sync. It will automatically download Kotlin, Jetpack Compose, and all necessary dependencies.
+### 1. Environment Setup
+Ensure you have Xcode 15+ and `xcodegen` installed.
+```bash
+brew install xcodegen
+```
 
 ### 2. Building and Running the App
+To run the app on an iOS Simulator, simply use the `make` commands from your terminal:
 
-To run the app on an Android Emulator or physical device:
-- Use the run configuration dropdown in Android Studio toolbar, select **app**, and click the Run (Play) button.
-
-Alternatively, you can run Gradle commands from the terminal:
 ```bash
-# Build the debug APK
-./gradlew :app:assembleDebug
+# Generate the Xcode project and build for the Simulator
+make build-ios
 
-# Run static analysis and tests
-./gradlew lint testDebugUnitTest
+# Boot the simulator and launch the app
+make run-ios
+```
+
+Alternatively, after running `make build-ios`, you can open the generated `LegoStyleDemo.xcodeproj` in Xcode and click the Play button.
+
+### 3. CI and Testing
+To run static analysis and tests locally before opening a PR:
+```bash
+make test-ios
 ```
 
 ## Workflow: Integrating a New Feature
 
 When you need to build a new feature, follow this standard workflow to keep the Lego architecture clean and modular:
 
-1.  **Create a New Feature Module:**
-    *   In Android Studio, right click the project root and select **New > Module**.
-    *   Select **Android Library** and name it something like `:feature:your_new_feature`.
-2.  **Configure `build.gradle.kts`:**
-    *   Open your new feature's `build.gradle.kts` file.
-    *   Enable Jetpack Compose and add any required dependencies (like Hilt for injection or ViewModel libraries).
-    *   If your feature needs UI components, add the `:core:design_system` module as a project dependency:
-        ```kotlin
-        dependencies {
-            implementation(project(":core:design_system"))
-            // Other dependencies...
-        }
-        ```
+1.  **Create a New Feature Folder:**
+    *   Navigate to `Sources/Features/` and create a new directory (e.g., `NewFeature`).
+2.  **XcodeGen Auto-Linking:**
+    *   Because our `project.yml` is configured to glob the `Sources/` directory, simply adding files to this folder will automatically include them in the next Xcode build.
 3.  **Develop in Isolation:**
-    *   Build your UI (using `@Composable` functions), State (ViewModels), and Repository interfaces entirely within this new module.
+    *   Build your UI (using `View`), State (`ObservableObject`), and Repository interfaces entirely within this new module.
 4.  **Integrate with the Main App:**
-    *   Once the feature is ready, link it to the main application shell.
-    *   Open `app/build.gradle.kts` and add your feature as a dependency:
-        ```kotlin
-        dependencies {
-            implementation(project(":feature:your_new_feature"))
-        }
-        ```
-5.  **Sync Gradle:**
-    *   Click "Sync Now" in Android Studio to resolve the new module graph.
+    *   Once the feature is ready, link it to the main application shell inside `Sources/App`.
+    *   Add it to your `NavigationStack` routing destination.
+5.  **Regenerate Project:**
+    *   Run `make build-ios` to update the Xcode indices.
 
-## Code Generation & DI
+## Dependency Management
 
-This native port utilizes **Hilt (Dagger)** for Dependency Injection. Unlike Flutter where manual commands like `make generate` were required, Android Studio and Gradle seamlessly run code generation via KSP (Kotlin Symbol Processing) every time you build the project. No manual terminal scripts are required!
+This native port utilizes **Swift Package Manager (SPM)** for external dependencies. Any external libraries should be added to the `dependencies:` block inside the `project.yml` file, and XcodeGen will automatically resolve them during project generation.
