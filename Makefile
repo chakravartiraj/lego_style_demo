@@ -9,17 +9,33 @@ export ANDROID_HOME ?= $(HOME)/Library/Android/sdk
 # Default target
 help:
 	@echo "Available commands:"
-	@echo "  make build       - Build the debug APK"
-	@echo "  make lint        - Run Android static analysis (lint)"
-	@echo "  make test        - Run unit tests across all modules"
-	@echo "  make clean       - Clean the build directory"
-	@echo "  make clean-all   - Deep clean (stop Gradle daemons, remove caches)"
-	@echo "  make sync        - Sync Gradle dependencies"
-	@echo "  make create-emulator - Create an Android emulator if it doesn't exist"
-	@echo "  make run-android - Install and launch the app on connected device/emulator"
-build:
+	@echo "  make build-apk-debug   - Build the debug APK"
+	@echo "  make build-apk-release - Build the release APK"
+	@echo "  make build-aab-debug   - Build the debug App Bundle (AAB)"
+	@echo "  make build-aab-release - Build the release App Bundle (AAB)"
+	@echo "  make lint              - Run Android static analysis (lint)"
+	@echo "  make test              - Run unit tests across all modules"
+	@echo "  make clean             - Clean the build directory"
+	@echo "  make clean-all         - Deep clean (stop Gradle daemons, remove caches)"
+	@echo "  make sync              - Sync Gradle dependencies"
+	@echo "  make create-emulator   - Create an Android emulator if it doesn't exist"
+	@echo "  make run-android       - Install and launch the app on connected device/emulator"
+
+build-apk-debug:
 	@echo "🔨 Building debug APK..."
 	./gradlew assembleDebug
+
+build-apk-release:
+	@echo "📦 Building release APK..."
+	./gradlew assembleRelease
+
+build-aab-debug:
+	@echo "📦 Building debug AAB..."
+	./gradlew bundleDebug
+
+build-aab-release:
+	@echo "🚀 Building release AAB..."
+	./gradlew bundleRelease
 
 lint:
 	@echo "🔍 Running Android static analysis..."
