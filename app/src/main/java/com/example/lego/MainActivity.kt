@@ -35,10 +35,14 @@ fun LegoAppNavigation() {
 
     NavHost(navController = navController, startDestination = "lego_list") {
         composable("lego_list") {
-            LegoListScreen()
+            LegoListScreen(
+                onNavigateToHarryPotter = { navController.navigate("harry_potter") }
+            )
         }
         composable("harry_potter") {
-            HarryPotterScreen()
+            HarryPotterScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
     }
 }

@@ -12,9 +12,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.foundation.clickable
 
 @Composable
-fun LegoListScreen() {
+fun LegoListScreen(
+    viewModel: LegoListViewModel = hiltViewModel(),
+    onNavigateToHarryPotter: () -> Unit = {}
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -33,7 +38,7 @@ fun LegoListScreen() {
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(6) { index ->
-                    LegoWorldCard("World $index")
+                    LegoWorldCard("World $index", onClick = { onNavigateToHarryPotter() })
                 }
             }
         }
@@ -41,7 +46,7 @@ fun LegoListScreen() {
 }
 
 @Composable
-fun LegoWorldCard(title: String) {
+fun LegoWorldCard(title: String, onClick: () -> Unit) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -49,6 +54,7 @@ fun LegoWorldCard(title: String) {
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f)
+            .clickable { onClick() }
     ) {
         Box(
             contentAlignment = Alignment.Center,
